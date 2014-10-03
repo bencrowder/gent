@@ -5,6 +5,7 @@ from django.db.models import Q, Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Tag, Target, Item
+import datetime
 
 #@login_required()
 def home(request):
@@ -77,24 +78,44 @@ def target(request, target_id):
 
     return render(request, 'target.html', {'user': request.user, 'title': '{} - Gent'.format(target),'target': target})
 
+#@login_required()
+def item(request, item_id):
+    # Get item 
+    item = Item.objects.get(id=item_id)
+
+    return render(request, 'item.html', {'user': request.user, 'title': '{} - Gent'.format(item),'item': item})
 
 def ws_update_item_order(request):
     order = request.GET.get('order', '')
-
-    print order
     id_list = order.split(',')
-    print id_list
 
     try:
         for i, item_id in enumerate(id_list):
             item_id = id_list[i]
-            print "Getting {}".format(item_id)
             item = Item.objects.get(id=item_id)
             item.order = i
             item.save()
         response = { 'status': 200 }
     except:
         response = { 'status': 500, 'message': "Couldn't update orders" }
+
+    return JsonResponse(response)
+
+def ws_toggle_item_complete(request):
+    item_id = request.GET.get('item_id', '')
+
+    try:
+        item = Item.objects.get(id=item_id)
+        if item.completed:
+            item.completed = False
+            item.date_completed = None
+        else:
+            item.completed = True
+            item.date_completed = datetime.datetime.now()
+        item.save()
+        response = { 'status': 200 }
+    except:
+        response = { 'status': 500, 'message': "Couldn't toggle completion" }
 
     return JsonResponse(response)
 

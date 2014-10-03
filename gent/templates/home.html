@@ -17,7 +17,7 @@
 	<ul class="targets">
 		{% for target in recent_targets %}
 		<li class="container">
-			<a href="/target/{{ target.id }}/">
+			<a href="{% url "target" target.id %}">
 				<label>{{ target }}</label>
 				<div class="sub">{{ target.incomplete_items.all|length }} items, {{ target.incomplete_items.0.date_created|date:"j M Y" }}</div>
 			</a>
@@ -32,7 +32,7 @@
 	<ul class="items">
 		{% for item in recent_items %}
 		<li class="container">
-			<a href="/target/{{ item.target.id }}/">
+			<a href="{% url "item" item.id %}">
 				<label>{{ item.title }}</label>
 				<div class="sub">{{ item.target }}</div>
 			</a>

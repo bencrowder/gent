@@ -1,0 +1,63 @@
+{% extends '_base.html' %}
+
+{% load markdown %}
+
+{% block content %}
+<div id="item-header" class="container{% if item.completed %} completed{% endif %}" data-id="{{ item.id }}">
+	<div class="checkbox"></div>
+	<h2>
+		<label>{{ item.title }}</label>
+	</h2>
+</div>
+
+<section>
+	<h2 class="container">Target</h2>
+	<div class="content container">
+		<a href="{% url "target" item.target.id %}">{{ item.target }}</a>
+	</div>
+</section>
+
+{% if item.date_completed %}
+<section id="completed-container">
+	<h2 class="container">Completed</h2>
+	<div class="content container">
+		{{ item.date_completed|date:"j M Y" }}
+	</div>
+</section>
+{% endif %}
+
+<section>
+	<h2 class="container">Created</h2>
+	<div class="content container">
+		{{ item.date_created|date:"j M Y" }}
+	</div>
+</section>
+
+{% if item.notes %}
+<section id="notes">
+	<h2 class="container">Notes</h2>
+
+	<div class="content container">
+		{{ item.notes|markdown }}
+	</div>
+</section>
+{% endif %}
+
+{% if item.tags|length %}
+<section>
+	<h2 class="container">Tags</h2>
+
+	<ul class="tags container">
+		{% for tag in item.tags %}
+		<li><a href="/search/?q=tag:{{ tag }}">#{{ tag }}</a></li>
+		{% endfor %}
+	</ul>
+</section>
+{% endif %}
+
+<section id="controls" class="container">
+	<span id="edit-link">Edit</span>
+	<span id="delete-link">Delete</span>
+</section>
+
+{% endblock content %}

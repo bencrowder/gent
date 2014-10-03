@@ -15,11 +15,13 @@
 </div>
 
 {% if target.incomplete_items|length %}
-<ul class="items linkless sortable">
+<ul class="items sortable">
 	{% for item in target.incomplete_items %}
 	<li class="container" data-id="{{ item.id }}">
-		{{ item.title }}
-		{% if item.notes %}<div id="notes" class="sub">{{ item.notes|markdown }}</div>{% endif %}
+		<a href="{% url "item" item.id %}">
+			<label>{{ item.title }}</label>
+			{% if item.notes %}<div id="notes" class="sub">{{ item.notes|markdown }}</div>{% endif %}
+		</a>
 	</li>
 	{% endfor %}
 </ul>
@@ -39,10 +41,10 @@
 <section>
 	<h2 class="container">Completed</h2>
 
-	<ul class="items linkless completed">
+	<ul class="items completed">
 		{% for item in target.completed_items %}
 		<li class="container">
-			{{ item.title }}
+			<a href="{% url "item" item.id %}">{{ item.title }}</a>
 		</li>
 		{% endfor %}
 	</ul>

@@ -21,4 +21,26 @@ $(document).ready(function() {
 			});
 		},
 	});
+
+
+	$("#item-header").on("touchstart click", function() {
+		var item_id = $(this).attr("data-id");
+		var item = $(this);
+
+		// Toggle completion
+		$.ajax({
+			url: '/ws/item/toggle-complete/?item_id=' + item_id,
+			method: 'POST',
+			success: function(data) {
+				item.toggleClass("completed");	
+				return false;
+			},
+			error: function(data) {
+				console.log("Error! :(", data);
+				return false;
+			},
+		});
+
+		return false;
+	});
 });
