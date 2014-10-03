@@ -1,0 +1,12 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<h2><a href="https://familysearch.org/tree/#view=ancestor&person={{ target.husband_id }}">{{ target.husband_name }}</a> ({{ target.husband_id }})</h2>
+<h2><a href="https://familysearch.org/tree/#view=ancestor&person={{ target.wife_id }}">{{ target.wife_name }}</a> ({{ target.wife_id }})</h2>
+
+<ul>
+	{% for item in target.items.all %}
+	<li>{{ item.title }}</li>
+	{% endfor %}
+</ul>
+{% endblock content %}

@@ -1,0 +1,19 @@
+body						{ margin: 0; padding: 0; }
+body *						{ font-family: Source Sans Pro; }
+
+*							{ -moz-box-sizing: border-box; box-sizing: border-box; }
+
+.container					{ width: 90%; max-width: 550px; margin: 0px auto; }
+
+
+/* Home */
+
+#home						{ background: #333; color: #fff; }
+#home a						{ color: #fff; text-decoration: none; display: inline-block; padding: 5px 0; }
+#home a:hover				{ color: #f00; }
+#home a.logout				{ float: right; }
+
+/* Banner */
+
+#banner						{ background: #369; color: #fff; }
+#banner form				{ padding: .5em 0; }

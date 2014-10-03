@@ -1,0 +1,49 @@
+{% load staticfiles %}
+{% load url from future %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+	<title>{{ title }}</title>
+
+	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+	<link href="{% static 'style.css' %}" rel="stylesheet" type="text/css" charset="utf-8" />
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+
+	<script src="{% static 'app.js' %}" type="text/javascript" charset="utf-8"></script>
+
+	<link rel="shortcut icon" href="/static/favicon.ico" />
+</head>
+
+<body>
+	<section id="home">
+		<div class="container">
+			<a href="/">Home</a>
+			{% if user.is_authenticated %}
+			<a class="logout" href="{% url 'logout' %}">Logout</a>
+			{% endif %}
+        </div>
+    </section>
+
+	{% block banner %}
+	<section id="banner">
+		<div class="container">
+			<form action="{% url 'search' %}" method="get">
+				<input type="text" id="q" name="q" autocapitalize="off" autocorrect="off" {% if query %}value="{{ query }}"{% endif %}/>
+
+				<input type="submit" id="search" value="Search" />
+			</form>
+		</div>
+	</section>
+	{% endblock banner %}
+
+	<section id="body">
+		<div class="container">
+			{% block content %}{% endblock content %}
+		</div>
+	</section>
+</body>
+</html>

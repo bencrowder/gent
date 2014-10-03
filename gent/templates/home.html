@@ -1,0 +1,27 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<h2>Tags</h2>
+
+<ul>
+	{% for tag in tags %}
+	<li><a href="/search/?q=tag:{{ tag }}">{{ tag }}</a></li>
+	{% endfor %}
+</ul>
+
+<h2>Targets with Recent Todo Items</h2>
+
+<ul>
+	{% for target in recent_targets %}
+	<li><a href="/target/{{ target.id }}/">{{ target }}</a> ({{ target.incomplete_items.all|length }} items)</li>
+	{% endfor %}
+</ul>
+
+<h2>Targets with Most Todo Items</h2>
+
+<ul>
+	{% for target in largest_targets %}
+	<li><a href="/target/{{ target.id }}/">{{ target }}</a> ({{ target.incomplete_items.all|length }} items)</li>
+	{% endfor %}
+</ul>
+{% endblock content %}

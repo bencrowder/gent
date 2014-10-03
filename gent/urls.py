@@ -3,8 +3,11 @@ from django.contrib import admin
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'gent.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+    url(r'^$', 'gent.views.home', name='home'),
+    url(r'^search/$', 'gent.views.search', name='search'),
+    url(r'^target/(?P<target_id>.+?)/$', 'gent.views.target', name='target'),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
+    url(r'^logout/$', 'gent.views.logout', name='logout'),
 )

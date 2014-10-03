@@ -1,0 +1,34 @@
+{% extends '_base.html' %}
+
+{% block content %}
+{% if targets.length == 0 and items.length == 0 and tags.length == 0 %}
+<h2>No results for {{ query }}</h2>
+{% else %}
+<h2>Searching for {{ query }}</h2>
+
+<h2>Targets</h2>
+
+<ul>
+	{% for target in targets %}
+	<li><a href="/target/{{ target.id }}/">{{ target }}</a> ({{ target.incomplete_items|length }} items)</li>
+	{% endfor %}
+</ul>
+
+<h2>Items</h2>
+
+<ul>
+	{% for item in items %}
+	<li><a href="/target/{{ item.target.id }}/">{{ item }}</a> ({{ item.target }})</li>
+	{% endfor %}
+</ul>
+
+<h2>Tags</h2>
+
+<ul>
+	{% for tag in tags %}
+	<li><a href="/search/?q=tag:{{ tag }}">{{ tag }}</a> ({{ tag.targets.all|length }} targets, {{ tag.items.all|length }} items)</li>
+	{% endfor %}
+</ul>
+
+{% endif %}
+{% endblock content %}
