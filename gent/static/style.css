@@ -1,4 +1,4 @@
-body						{ margin: 0; padding: 0; }
+body						{ margin: 0; padding: 0; background: #222; }
 body *						{ font-family: Source Sans Pro; }
 
 *							{ -moz-box-sizing: border-box; box-sizing: border-box; }
@@ -29,16 +29,20 @@ a:hover						{ color: #000; }
 #search form button:hover	{ background: #111; }
 
 
+/* Content */
+
+#body						{ background: #fff; padding-top: 1.5em; padding-bottom: 2em; }
+
+
 /* Items */
 
-ul.items					{ padding: .5em 0; list-style: none; background: #eee; font-size: 1.1em; margin-top: .45em; }
+ul.items					{ padding: 0; list-style: none; font-size: 1.1em; margin-top: .45em; }
 ul.items > li				{ list-style: none; cursor: pointer; }
-ul.items > li > a			{ display: block; padding: .5em .6em; background: #fff; border-radius: 5px; line-height: 1.2em; border: solid 1px #ddd; box-shadow: 0 1px 3px #ddd; cursor: pointer; }
+ul.items > li > a			{ display: block; padding: .5em .6em; background: #745930; border-radius: 5px; line-height: 1.2em; box-shadow: 0 1px 3px #bbb; cursor: pointer; color: #fff; }
 ul.items > li > a:hover		{ background: #000; color: #fff; }
 ul.items > li + li			{ margin-top: .5em; }
 ul.items > li label			{ display: block; line-height: 1.1em; cursor: pointer; }
-ul.items > li div.sub		{ font-size: .8em; color: rgba(0, 0, 0, 0.4); line-height: 1.2em; margin-top: 3px; }
-ul.items > li > a:hover div.sub		{ color: rgba(255, 255, 255, 0.4); }
+ul.items > li div.sub		{ font-size: .8em; color: rgba(255, 255, 255, 0.4); line-height: 1.2em; margin-top: 3px; }
 
 ul.items.linkless > li 		{ display: block; padding: .5em .6em; background: #fff; border-radius: 5px; line-height: 1.2em; border: solid 1px #ddd; box-shadow: 0 1px 3px #ddd; }
 
@@ -52,9 +56,10 @@ ul.items li.placeholder		{ height: 2em; background: rgba(0, 0, 0, 0.1); border: 
 
 /* Target page */
 
-#target-header				{ margin-top: 1em; }
 #target-header h2			{ font-weight: 400; margin: 0; font-size: 1.2em; line-height: 1.1em; }
-#target-header h2 span		{ display: block; font-size: .7em; color: #aaa; }
+#target-header h2 span		{ display: block; font-size: .7em; color: #ddd; margin-top: .1em; }
+#target-header h2 span a	{ color: #7db3dd; }
+#target-header h2 span a:hover	{ color: #000; }
 #target-header h2 + h2		{ margin-top: .5em; }
 
 #target-header + ul			{ margin-top: 1.25em; }
@@ -62,7 +67,7 @@ ul.items li.placeholder		{ height: 2em; background: rgba(0, 0, 0, 0.1); border: 
 
 /* Item page */
 
-#item-header				{ margin-top: 1.5em; border: solid 1px #ddd; border-left: solid 3.1em #ddd; border-radius: 3px; box-shadow: 0 1px 5px #ddd; padding: .6em; cursor: pointer; min-height: 3em; }
+#item-header				{ border: solid 1px #ddd; border-left: solid 3.1em #ddd; border-radius: 3px; box-shadow: 0 1px 5px #ddd; padding: .6em; cursor: pointer; min-height: 3em; }
 #item-header .checkbox		{ border: solid 1px #818181; float: left; width: 1.5em; height: 1.5em; border-radius: 3px; margin-left: -2.9em; box-shadow: 1px 1px 5px #c0c0c0 inset; }
 #item-header.completed .checkbox	{ background: #444; border-color: #444; box-shadow: none; }
 #item-header h2				{ font-weight: 400; margin: 0; font-size: 1.2em; line-height: 1.1em; cursor: pointer; margin-left: .2em; }
@@ -87,16 +92,17 @@ section#notes				{ margin-top: 1.5em; }
 /* Section */
 
 section						{ margin-top: 1.5em; }
+section:first-child			{ margin-top: 0; }
 section h2					{ font-weight: 400; font-size: 1em; line-height: 1.1em; color: #6993b4; margin-bottom: .2em !important; }
 
 
 /* Targets */
 
-ul.targets					{ padding: .5em 0; list-style: none; background: #eee; font-size: 1.1em; margin-top: .45em; }
+ul.targets					{ padding: 0; list-style: none; font-size: 1.1em; margin-top: .45em; }
 ul.targets > li				{ list-style: none; cursor: pointer; }
-ul.targets > li + li			{ margin-top: .5em; }
-ul.targets > li > a				{ display: block; padding: .5em .6em; background: #3e639b; border-radius: 5px; border: solid 1px #ddd; box-shadow: 0 1px 3px #ddd; color: #fff; }
-ul.targets > li > a:hover		{ background: #000; }
+ul.targets > li + li		{ margin-top: .5em; }
+ul.targets > li > a			{ display: block; padding: .5em .6em; background: #3e639b; border-radius: 5px; box-shadow: 0 1px 3px #bbb; color: #fff; }
+ul.targets > li > a:hover	{ background: #000; }
 ul.targets > li > a label		{ display: block; line-height: 1.1em; color: #fff; cursor: pointer; }
 ul.targets > li > a div.sub		{ font-size: .8em; color: rgba(255, 255, 255, 0.4); line-height: 1.2em; margin-top: 3px; }
 

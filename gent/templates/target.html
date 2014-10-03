@@ -5,12 +5,8 @@
 {% block content %}
 <div id="target-header" class="container">
 	<h2>
-		<label>{{ target.husband_name }}</label>
-		<span><a href="https://familysearch.org/tree/#view=ancestor&person={{ target.husband_id }}">{{ target.husband_id }}</a></span>
-	</h2>
-	<h2>
-		<label>{{ target.wife_name }}</label>
-		<span><a href="https://familysearch.org/tree/#view=ancestor&person={{ target.wife_id }}">{{ target.wife_id }}</a></span>
+		<label>{{ target.husband_name }} &amp; {{ target.wife_name }}</label>
+		<span><a href="https://familysearch.org/tree/#view=ancestor&person={{ target.husband_id }}">{{ target.husband_id }}</a> / <a href="https://familysearch.org/tree/#view=ancestor&person={{ target.wife_id }}">{{ target.wife_id }}</a></span>
 	</h2>
 </div>
 
