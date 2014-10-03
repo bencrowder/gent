@@ -77,5 +77,27 @@ def target(request, target_id):
 
     return render(request, 'target.html', {'user': request.user, 'title': '{} - Gent'.format(target),'target': target})
 
+
+def ws_update_item_order(request):
+    order = request.GET.get('order', '')
+
+    print order
+    id_list = order.split(',')
+    print id_list
+
+    try:
+        for i, item_id in enumerate(id_list):
+            item_id = id_list[i]
+            print "Getting {}".format(item_id)
+            item = Item.objects.get(id=item_id)
+            item.order = i
+            item.save()
+        response = { 'status': 200 }
+    except:
+        response = { 'status': 500, 'message': "Couldn't update orders" }
+
+    return JsonResponse(response)
+
+
 def logout(request):
     return logout_then_login(request)

@@ -31,7 +31,7 @@ a:hover						{ color: #000; }
 
 /* Items */
 
-ul.items					{ padding: .5em 0; list-style: none; background: #eee; font-size: 1.1em; }
+ul.items					{ padding: .5em 0; list-style: none; background: #eee; font-size: 1.1em; margin-top: .45em; }
 ul.items > li				{ list-style: none; cursor: pointer; }
 ul.items > li > a			{ display: block; padding: .5em .6em; background: #fff; border-radius: 5px; line-height: 1.2em; border: solid 1px #ddd; box-shadow: 0 1px 3px #ddd; cursor: pointer; }
 ul.items > li > a:hover		{ background: #000; color: #fff; }
@@ -45,6 +45,8 @@ ul.items.linkless > li 		{ display: block; padding: .5em .6em; background: #fff;
 ul.items.completed			{ padding: 0; background: none; font-size: .8em; margin-top: .6em; }
 ul.items.completed > li		{ padding: 0; background: none; border: none; box-shadow: none; color: #aaa; text-decoration: line-through; }
 ul.items.completed > li + li	{ }
+
+ul.items li.placeholder		{ height: 2em; background: rgba(0, 0, 0, 0.1); border: dotted 1px #999; box-shadow: none; }
 
 
 /* Target page */
@@ -93,3 +95,12 @@ ul.tags li					{ display: inline-block; line-height: 1.5em; margin-right: .5em; 
 ul.tags li:last-child		{ margin-right: 0; }
 
 h2 + ul.tags				{ margin-top: .5em; }
+
+
+
+/* Media queries */
+@media screen and (min-width: 700px) {
+	ul.targets				{ padding-top: 1em; padding-bottom: 1em; }
+	ul.items				{ padding-top: 1em; padding-bottom: 1em; }
+}
+

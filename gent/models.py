@@ -21,11 +21,11 @@ class Target(models.Model):
 
     # Return incomplete items
     def incomplete_items(self):
-        return self.items.filter(completed=False)
+        return self.items.filter(completed=False).order_by('order')
 
     # Return completed items
     def completed_items(self):
-        return self.items.filter(completed=True)
+        return self.items.filter(completed=True).order_by('-date_completed')
 
 
 class Item(models.Model):

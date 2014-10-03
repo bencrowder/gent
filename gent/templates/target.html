@@ -15,9 +15,9 @@
 </div>
 
 {% if target.incomplete_items|length %}
-<ul class="items linkless">
+<ul class="items linkless sortable">
 	{% for item in target.incomplete_items %}
-	<li class="container">
+	<li class="container" data-id="{{ item.id }}">
 		{{ item.title }}
 		{% if item.notes %}<div id="notes" class="sub">{{ item.notes|markdown }}</div>{% endif %}
 	</li>
