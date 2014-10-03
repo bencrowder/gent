@@ -56,6 +56,8 @@ ul.items li.placeholder		{ height: 2em; background: rgba(0, 0, 0, 0.1); border: 
 #target-header h2 span		{ display: block; font-size: .7em; color: #aaa; }
 #target-header h2 + h2		{ margin-top: .5em; }
 
+#target-header + ul			{ margin-top: 1.25em; }
+
 
 /* Notes */
 
