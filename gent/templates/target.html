@@ -1,12 +1,25 @@
 {% extends '_base.html' %}
 
 {% block content %}
-<h2><a href="https://familysearch.org/tree/#view=ancestor&person={{ target.husband_id }}">{{ target.husband_name }}</a> ({{ target.husband_id }})</h2>
-<h2><a href="https://familysearch.org/tree/#view=ancestor&person={{ target.wife_id }}">{{ target.wife_name }}</a> ({{ target.wife_id }})</h2>
+<div id="target-header" class="container">
+	<h2><a href="https://familysearch.org/tree/#view=ancestor&person={{ target.husband_id }}">{{ target.husband_name }}</a> <span>{{ target.husband_id }}</span></h2>
+	<h2><a href="https://familysearch.org/tree/#view=ancestor&person={{ target.wife_id }}">{{ target.wife_name }}</a> <span>{{ target.wife_id }}</span></h2>
+</div>
 
-<ul>
+<ul class="items">
 	{% for item in target.items.all %}
-	<li>{{ item.title }}</li>
+	<li class="container">{{ item.title }}</li>
 	{% endfor %}
 </ul>
+
+{% if target.notes %}
+<div id="notes" class="container">
+	<h3>Notes</h3>
+
+	<div class="content">
+		{{ target.notes }}
+	</div>
+</div>
+{% endif %}
+
 {% endblock content %}

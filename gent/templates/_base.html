@@ -8,7 +8,7 @@
 
 	<title>{{ title }}</title>
 
-	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic,600italic' rel='stylesheet' type='text/css'>
 	<link href="{% static 'style.css' %}" rel="stylesheet" type="text/css" charset="utf-8" />
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
@@ -21,29 +21,28 @@
 <body>
 	<section id="home">
 		<div class="container">
-			<a href="/">Home</a>
+			<a id="home-link" href="/">Home</a>
+			<a id="add-item" href="">Add</a>
 			{% if user.is_authenticated %}
-			<a class="logout" href="{% url 'logout' %}">Logout</a>
+			<a id="logout-link" href="{% url 'logout' %}">Logout</a>
 			{% endif %}
         </div>
     </section>
 
-	{% block banner %}
-	<section id="banner">
+	{% block search %}
+	<section id="search">
 		<div class="container">
 			<form action="{% url 'search' %}" method="get">
 				<input type="text" id="q" name="q" autocapitalize="off" autocorrect="off" {% if query %}value="{{ query }}"{% endif %}/>
 
-				<input type="submit" id="search" value="Search" />
+				<button type="submit" value="Search">Search</button>
 			</form>
 		</div>
 	</section>
-	{% endblock banner %}
+	{% endblock search %}
 
 	<section id="body">
-		<div class="container">
-			{% block content %}{% endblock content %}
-		</div>
+		{% block content %}{% endblock content %}
 	</section>
 </body>
 </html>
