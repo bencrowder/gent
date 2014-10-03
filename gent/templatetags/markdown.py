@@ -1,6 +1,9 @@
 from django import template
 from django.utils.safestring import mark_safe
+from django.utils.encoding import force_text
 import mistune
+
+register = template.Library()
 
 @register.filter(is_safe=True)
 def markdown(value):

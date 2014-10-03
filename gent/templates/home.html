@@ -1,27 +1,58 @@
 {% extends '_base.html' %}
 
 {% block content %}
-<h2>Tags</h2>
+<section class="home">
+	<h2 class="container">Top Tags</h2>
 
-<ul>
-	{% for tag in tags %}
-	<li><a href="/search/?q=tag:{{ tag }}">{{ tag }}</a></li>
-	{% endfor %}
-</ul>
+	<ul class="tags container">
+		{% for tag in tags %}
+		<li><a href="/search/?q=tag:{{ tag }}">#{{ tag }}</a></li>
+		{% endfor %}
+	</ul>
+</section>
 
-<h2>Targets with Recent Todo Items</h2>
+<section class="home">
+	<h2 class="container">Recent Targets</h2>
 
-<ul>
-	{% for target in recent_targets %}
-	<li><a href="/target/{{ target.id }}/">{{ target }}</a> ({{ target.incomplete_items.all|length }} items)</li>
-	{% endfor %}
-</ul>
+	<ul class="targets">
+		{% for target in recent_targets %}
+		<li class="container">
+			<a href="/target/{{ target.id }}/">
+				<label>{{ target }}</label>
+				<div class="sub">{{ target.incomplete_items.all|length }} items, {{ target.incomplete_items.0.date_created|date:"j M Y" }}</div>
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+</section>
 
-<h2>Targets with Most Todo Items</h2>
+<section class="home">
+	<h2 class="container">Recent Items</h2>
 
-<ul>
-	{% for target in largest_targets %}
-	<li><a href="/target/{{ target.id }}/">{{ target }}</a> ({{ target.incomplete_items.all|length }} items)</li>
-	{% endfor %}
-</ul>
+	<ul class="items">
+		{% for item in recent_items %}
+		<li class="container">
+			<a href="/target/{{ item.target.id }}/">
+				<label>{{ item.title }}</label>
+				<div class="sub">{{ item.target }}</div>
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+</section>
+
+<section class="home">
+	<h2 class="container">Top Targets</h2>
+
+	<ul class="targets">
+		{% for target in largest_targets %}
+		<li class="container">
+			<a href="/target/{{ target.id }}/">
+				<label>{{ target }}</label>
+				<div class="sub">{{ target.incomplete_items.all|length }} items</div>
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+</section>
 {% endblock content %}

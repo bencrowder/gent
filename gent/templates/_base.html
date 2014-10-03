@@ -1,5 +1,4 @@
 {% load staticfiles %}
-{% load markup %}
 {% load url from future %}
 <!DOCTYPE html>
 <html>
@@ -20,7 +19,7 @@
 </head>
 
 <body>
-	<section id="home">
+	<div id="home">
 		<div class="container">
 			<a id="home-link" href="/">Home</a>
 			<a id="add-item" href="">Add</a>
@@ -28,10 +27,10 @@
 			<a id="logout-link" href="{% url 'logout' %}">Logout</a>
 			{% endif %}
         </div>
-    </section>
+    </div>
 
 	{% block search %}
-	<section id="search">
+	<div id="search">
 		<div class="container">
 			<form action="{% url 'search' %}" method="get">
 				<input type="text" id="q" name="q" autocapitalize="off" autocorrect="off" {% if query %}value="{{ query }}"{% endif %}/>
@@ -39,11 +38,11 @@
 				<button type="submit" value="Search">Search</button>
 			</form>
 		</div>
-	</section>
+	</div>
 	{% endblock search %}
 
-	<section id="body">
+	<div id="body">
 		{% block content %}{% endblock content %}
-	</section>
+	</div>
 </body>
 </html>

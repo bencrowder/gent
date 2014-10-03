@@ -1,34 +1,57 @@
 {% extends '_base.html' %}
 
 {% block content %}
-{% if targets.length == 0 and items.length == 0 and tags.length == 0 %}
-<h2>No results for {{ query }}</h2>
+{% if targets|length == 0 and items|length == 0 and tags|length == 0 %}
+<section class="results">
+	<h2 class="container">No results.</h2>
+</section>
 {% else %}
-<h2>Searching for {{ query }}</h2>
 
-<h2>Targets</h2>
+{% if targets|length %}
+<section class="results">
+	<h2 class="container">Matching Targets</h2>
 
-<ul>
-	{% for target in targets %}
-	<li><a href="/target/{{ target.id }}/">{{ target }}</a> ({{ target.incomplete_items|length }} items)</li>
-	{% endfor %}
-</ul>
+	<ul class="targets">
+		{% for target in targets %}
+		<li class="container">
+			<a href="/target/{{ target.id }}/">
+				<label>{{ target }}</label>
+				<div class="sub">{{ target.incomplete_items.all|length }} items</div>
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+</section>
+{% endif %}
 
-<h2>Items</h2>
+{% if items|length %}
+<section class="results">
+	<h2 class="container">Matching Items</h2>
 
-<ul>
-	{% for item in items %}
-	<li><a href="/target/{{ item.target.id }}/">{{ item }}</a> ({{ item.target }})</li>
-	{% endfor %}
-</ul>
+	<ul class="items">
+		{% for item in items %}
+		<li class="container">
+			<a href="/target/{{ item.target.id }}/">
+				<label>{{ item.title }}</label>
+				<div class="sub">{{ item.target }}</div>
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+</section>
+{% endif %}
 
-<h2>Tags</h2>
+{% if tags|length %}
+<section class="results">
+	<h2 class="container">Matching Tags</h2>
 
-<ul>
-	{% for tag in tags %}
-	<li><a href="/search/?q=tag:{{ tag }}">{{ tag }}</a> ({{ tag.targets.all|length }} targets, {{ tag.items.all|length }} items)</li>
-	{% endfor %}
-</ul>
+	<ul class="tags container">
+		{% for tag in tags %}
+		<li><a href="/search/?q=tag:{{ tag }}">#{{ tag }}</a></li>
+		{% endfor %}
+	</ul>
+</section>
+{% endif %}
 
 {% endif %}
 {% endblock content %}

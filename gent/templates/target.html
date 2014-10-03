@@ -1,25 +1,52 @@
 {% extends '_base.html' %}
 
+{% load markdown %}
+
 {% block content %}
 <div id="target-header" class="container">
-	<h2><a href="https://familysearch.org/tree/#view=ancestor&person={{ target.husband_id }}">{{ target.husband_name }}</a> <span>{{ target.husband_id }}</span></h2>
-	<h2><a href="https://familysearch.org/tree/#view=ancestor&person={{ target.wife_id }}">{{ target.wife_name }}</a> <span>{{ target.wife_id }}</span></h2>
+	<h2>
+		<label>{{ target.husband_name }}</label>
+		<span><a href="https://familysearch.org/tree/#view=ancestor&person={{ target.husband_id }}">{{ target.husband_id }}</a></span>
+	</h2>
+	<h2>
+		<label>{{ target.wife_name }}</label>
+		<span><a href="https://familysearch.org/tree/#view=ancestor&person={{ target.wife_id }}">{{ target.wife_id }}</a></span>
+	</h2>
 </div>
 
-<ul class="items">
-	{% for item in target.items.all %}
-	<li class="container">{{ item.title }}</li>
+{% if target.incomplete_items|length %}
+<ul class="items linkless">
+	{% for item in target.incomplete_items %}
+	<li class="container">
+		{{ item.title }}
+		{% if item.notes %}<div id="notes" class="sub">{{ item.notes|markdown }}</div>{% endif %}
+	</li>
 	{% endfor %}
 </ul>
+{% endif %}
 
 {% if target.notes %}
-<div id="notes" class="container">
-	<h3>Notes</h3>
+<section id="notes">
+	<h2 class="container">Notes</h2>
 
-	<div class="content">
+	<div class="content container">
 		{{ target.notes|markdown }}
 	</div>
-</div>
+</section>
+{% endif %}
+
+{% if target.completed_items|length %}
+<section>
+	<h2 class="container">Completed</h2>
+
+	<ul class="items linkless completed">
+		{% for item in target.completed_items %}
+		<li class="container">
+			{{ item.title }}
+		</li>
+		{% endfor %}
+	</ul>
+</section>
 {% endif %}
 
 {% endblock content %}

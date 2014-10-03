@@ -9,15 +9,23 @@ from .models import Tag, Target, Item
 #@login_required()
 def home(request):
     # Get list of tags
-    tags = Tag.objects.all().order_by('name')
+    tags = Tag.objects.all().annotate(num_items=Count('items')).order_by('-num_items', 'name')[:10]
 
-    # Get list of targets with recent todos
-    recent_targets = Target.objects.all().order_by('-items__date_created').distinct()[:10]
+    # Get list of recent targets (targets with most recent items)
+    # Go through extra stuff to make it unique
+    items = Item.objects.all().order_by('-date_created')[:30]
+    targets = set()
+    targets_add = targets.add
+    recent_targets = [i.target for i in items if not (i.target in targets or targets_add(i.target))]
+
+    # Get list of recent items
+    recent_items = Item.objects.all().order_by('-date_created')[:3]
 
     # Get list of targets with most todos
-    largest_targets = Target.objects.all().annotate(num_items=Count('items')).order_by('-num_items')[:10]
+    # TODO: use # incomplete items instead
+    largest_targets = Target.objects.all().annotate(num_items=Count('items')).order_by('-num_items')[:3]
 
-    return render(request, 'home.html', {'user': request.user, 'title': 'Gent', 'tags': tags, 'recent_targets': recent_targets, 'largest_targets': largest_targets})
+    return render(request, 'home.html', {'user': request.user, 'title': 'Gent', 'tags': tags, 'recent_targets': recent_targets, 'recent_items': recent_items, 'largest_targets': largest_targets})
 
 #@login_required()
 def search(request):
