@@ -14,7 +14,7 @@ class Target(models.Model):
     wife_id = models.CharField('Wife: FamilyTree ID', max_length=50, blank=True)
     notes = models.TextField(blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
-    tags = models.ForeignKey(Tag, related_name='targets', blank=True, null=True)
+    tags = models.ManyToManyField(Tag, related_name='targets', blank=True, null=True)
 
     def __str__(self):
         return ' & '.join([self.husband_name, self.wife_name])
@@ -36,7 +36,7 @@ class Item(models.Model):
     date_completed = models.DateTimeField(blank=True, null=True)
 
     date_created = models.DateTimeField(auto_now_add=True)
-    tags = models.ForeignKey(Tag, related_name='items', blank=True, null=True)
+    tags = models.ManyToManyField(Tag, related_name='items', blank=True, null=True)
     order = models.IntegerField(default=0)
     notes = models.TextField(blank=True)
 

@@ -37,6 +37,18 @@
 </section>
 {% endif %}
 
+{% if target.tags.all|length %}
+<section>
+	<h2 class="container">Tags</h2>
+
+	<ul class="tags container">
+		{% for tag in target.tags.all %}
+		<li><a href="/search/?q=tag:{{ tag }}">#{{ tag }}</a></li>
+		{% endfor %}
+	</ul>
+</section>
+{% endif %}
+
 {% if target.completed_items|length %}
 <section>
 	<h2 class="container">Completed</h2>

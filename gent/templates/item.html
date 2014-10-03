@@ -43,12 +43,12 @@
 </section>
 {% endif %}
 
-{% if item.tags|length %}
+{% if item.tags.all|length %}
 <section>
 	<h2 class="container">Tags</h2>
 
 	<ul class="tags container">
-		{% for tag in item.tags %}
+		{% for tag in item.tags.all %}
 		<li><a href="/search/?q=tag:{{ tag }}">#{{ tag }}</a></li>
 		{% endfor %}
 	</ul>
