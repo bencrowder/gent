@@ -77,7 +77,7 @@ def search(request):
                 Q(name__icontains=query)
             ).distinct().order_by('name')
 
-    return render(request, 'search.html', {'user': request.user, 'title': '{} - Gent'.format(query), 'families': family_list, 'items': item_list, 'tags': tag_list, 'query': query})
+    return render(request, 'search.html', {'user': request.user, 'title': '{} - Gent'.format(query.encode('utf-8')), 'families': family_list, 'items': item_list, 'tags': tag_list, 'query': query})
 
 @login_required()
 def family(request, family_id):
