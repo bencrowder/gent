@@ -131,7 +131,7 @@ $(document).ready(function() {
 				},
 				success: function(data) {
 					console.log(data);
-				
+
 					// Close modal
 					$("form#edit-item-modal").slideUp(200);
 					$(".background").fadeOut(200);
@@ -201,37 +201,39 @@ $(document).ready(function() {
 	$("#edit-family-modal").on("submit", function(e) {
 		var url = "/ws/family/";
 
-		var itemId = $("#item-header").attr("data-id");
-		var title = $(this).find("textarea[name=title]").val().trim();
-		var family = $(this).find("input[name=family]").val().trim();
+		var familyId = $("#family-header").attr("data-id");
+		var husbandName = $(this).find("input[name=husband-name]").val().trim();
+		var husbandId = $(this).find("input[name=husband-id]").val().trim();
+		var wifeName = $(this).find("input[name=wife-name]").val().trim();
+		var wifeId = $(this).find("input[name=wife-id]").val().trim();
 		var notes = $(this).find("textarea[name=notes]").val().trim();
 		var tags = $(this).find("input[name=tags]").val().trim();
 		var dateCreated = $(this).find("input[name=datecreated]").val();
-		var dateCompleted = $(this).find("input[name=datecompleted]").val();
 
-		if (title != '') {
-			url += "?item_id=" + itemId;
+		if (husbandName != '' || wifeName != '') {
+			url += "?family_id=" + familyId;
 
 			$.ajax({
 				url: url,
 				method: "PUT",
 				data: {
-					family: family,
-					title: title,
+					husband_name: husbandName,
+					husband_id: husbandId,
+					wife_name: wifeName,
+					wife_id: wifeId,
 					tags: tags,
 					notes: notes,
 					datecreated: dateCreated,
-					datecompleted: dateCompleted,
 				},
 				success: function(data) {
 					console.log(data);
-				
+
 					// Close modal
-					$("form#edit-item-modal").slideUp(200);
+					$("form#edit-family-modal").slideUp(200);
 					$(".background").fadeOut(200);
 
-					// Redirect to new item page
-					window.location.href = "/item/" + itemId;
+					// Reload the page
+					window.location.href = "/family/" + familyId;
 				},
 				error: function(data) {
 					console.log("Error! :(");
@@ -252,13 +254,12 @@ $(document).ready(function() {
 		return false;
 	});
 
-	$("#delete-famiyl-modal").on("submit", function(e) {
+	$("#delete-family-modal").on("submit", function(e) {
 		var url = "/ws/family/";
-		var itemId = $("#item-header").attr("data-id");
-		var familyUrl = $("#item-header").attr("data-family-url");
+		var familyId = $("#family-header").attr("data-id");
 
-		if (itemId != '') {
-			url += "?item_id=" + itemId;
+		if (familyId != '') {
+			url += "?family_id=" + familyId;
 
 			$.ajax({
 				url: url,
@@ -267,11 +268,11 @@ $(document).ready(function() {
 					console.log(data);
 
 					// Close modal
-					$("form#delete-item-modal").slideUp(200);
+					$("form#delete-family-modal").slideUp(200);
 					$(".background").fadeOut(200);
 
-					// Redirect to family page
-					window.location.href = familyUrl;
+					// Redirect to home page
+					window.location.href = "/";
 				},
 				error: function(data) {
 					console.log("Error! :(");

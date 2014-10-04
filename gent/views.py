@@ -202,6 +202,67 @@ def ws_item(request):
 
     return JsonResponse(response)
 
+def ws_family(request):
+    family_id = request.GET.get('family_id', '')
+
+    # Special case for PUT
+    req = None
+    if request.method == 'PUT':
+        req = QueryDict(request.body)
+
+    if req:
+        husband_name = req.get('husband_name', '')
+        husband_id = req.get('husband_id', '')
+        wife_name = req.get('wife_name', '')
+        wife_id = req.get('wife_id', '')
+        datecreated = req.get('datecreated', '')
+        datecompleted = req.get('datecompleted', '')
+        notes = req.get('notes', '')
+
+        # Load tags
+        tag_list = req.get('tags', '')
+        tags = []
+        for tag in tag_list.split(', '):
+            if tag != '':
+                obj, created = Tag.objects.get_or_create(name=tag)
+                tags.append(obj)
+
+    if family_id:
+        family = Family.objects.get(id=family_id)
+
+    if request.method == 'PUT':
+        # Update family
+        if husband_name == '' and wife_name == '':
+            response = { 'status': 501, 'message': "Missing husband or wife name" }
+        else:
+            try:
+                family.husband_name = husband_name
+                family.husband_id = husband_id
+                family.wife_name = wife_name
+                family.wife_id = wife_id
+                family.notes = notes
+
+                family.tags.clear()
+                for tag in tags:
+                    family.tags.add(tag)
+
+                family.date_created = datecreated
+
+                family.save()
+
+                response = { 'status': 200 }
+            except e:
+                response = { 'status': 500, 'message': "Couldn't update family" }
+
+    elif request.method == 'DELETE':
+        try:
+            family.delete()
+            response = { 'status': 200 }
+        except e:
+            response = { 'status': 500, 'message': "Couldn't delete family" }
+
+    return JsonResponse(response)
+
 
 def logout(request):
     return logout_then_login(request)

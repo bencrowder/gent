@@ -6,7 +6,7 @@
 <div id="family-header" class="container" data-id="{{ family.id }}">
 	<h2>
 		<label>{{ family.html|safe }}</label>
-		<span><a href="https://familysearch.org/tree/#view=ancestor&person={{ family.husband_id }}">{{ family.husband_id }}</a> / <a href="https://familysearch.org/tree/#view=ancestor&person={{ family.wife_id }}">{{ family.wife_id }}</a></span>
+		{% if family.husband_id or family.wife_id %}<span><a href="https://familysearch.org/tree/#view=ancestor&person={{ family.husband_id }}">{{ family.husband_id }}</a> / <a href="https://familysearch.org/tree/#view=ancestor&person={{ family.wife_id }}">{{ family.wife_id }}</a></span>{% endif %}
 	</h2>
 </div>
 
