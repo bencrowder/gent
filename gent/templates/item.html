@@ -17,18 +17,6 @@
 	</div>
 </section>
 
-{% if item.date_completed %}
-<section id="completed-container">
-	<h2 class="container">Completed</h2>
-	<div class="content container" id="date-completed" data-date="{{ item.date_completed|date:"Y-m-d" }}">{{ item.date_completed|date:"j M Y" }}</div>
-</section>
-{% endif %}
-
-<section>
-	<h2 class="container">Created</h2>
-	<div class="content container" id="date-created" data-date="{{ item.date_created|date:"Y-m-d" }}">{{ item.date_created|date:"j M Y" }}</div>
-</section>
-
 {% if item.notes %}
 <section id="notes">
 	<h2 class="container">Notes</h2>
@@ -49,6 +37,19 @@
 	</ul>
 </section>
 {% endif %}
+
+{% if item.date_completed %}
+<section id="completed-container">
+	<h2 class="container">Completed</h2>
+	<div class="content container" id="date-completed" data-date="{{ item.date_completed|date:"Y-m-d" }}">{{ item.date_completed|date:"j M Y" }}</div>
+</section>
+{% endif %}
+
+<section>
+	<h2 class="container">Created</h2>
+	<div class="content container" id="date-created" data-date="{{ item.date_created|date:"Y-m-d" }}">{{ item.date_created|date:"j M Y" }}</div>
+</section>
+
 
 <section id="controls" class="container">
 	<span id="edit-item-link" class="edit">Edit</span>
