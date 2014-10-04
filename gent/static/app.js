@@ -212,6 +212,7 @@ $(document).ready(function() {
 	$("#edit-family-link").on("click", function(e) {
 		$(".background").fadeIn(200);
 		$("form#edit-family-modal").slideDown(200);
+		$("form#edit-family-modal #edit-husband-name").focus();
 
 		return false;
 	});
