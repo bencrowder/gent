@@ -24,9 +24,9 @@ def home(request):
 
     # Get list of families with most todos
     # TODO: use # incomplete items instead
-    largest_families = Family.objects.all().annotate(num_items=Count('items')).order_by('-num_items')[:3]
+    top_families = Family.objects.all().annotate(num_items=Count('items')).order_by('-num_items')[:3]
 
-    return render(request, 'home.html', {'user': request.user, 'title': 'Gent', 'tags': tags, 'recent_families': recent_families, 'recent_items': recent_items, 'largest_families': largest_families})
+    return render(request, 'home.html', {'user': request.user, 'title': 'Gent', 'tags': tags, 'recent_families': recent_families, 'recent_items': recent_items, 'top_families': top_families})
 
 #@login_required()
 def search(request):
