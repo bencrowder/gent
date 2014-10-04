@@ -7,7 +7,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Tag, Family, Item
 import datetime
 
-#@login_required()
+@login_required()
 def home(request):
     # Get list of tags
     tags = Tag.objects.all().annotate(num_items=Count('items')).order_by('-num_items', 'name')[:10]
@@ -29,7 +29,7 @@ def home(request):
 
     return render(request, 'home.html', {'user': request.user, 'title': 'Gent', 'tags': tags, 'recent_families': recent_families, 'recent_items': recent_items, 'top_families': top_families})
 
-#@login_required()
+@login_required()
 def search(request):
     query = request.GET.get('q', '')
 
@@ -72,7 +72,7 @@ def search(request):
 
     return render(request, 'search.html', {'user': request.user, 'title': '{} - Gent'.format(query), 'families': family_list, 'items': item_list, 'tags': tag_list, 'query': query})
 
-#@login_required()
+@login_required()
 def family(request, family_id):
     # Get family
     try:
@@ -86,7 +86,7 @@ def family(request, family_id):
         print e
         return render(request, '500.html', {'user': request.user, 'title': '500 - Gent'})
 
-#@login_required()
+@login_required()
 def item(request, item_id):
     # Get item 
     try:

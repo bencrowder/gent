@@ -25,8 +25,8 @@
 	<div id="home">
 		<div class="container">
 			<a id="home-link" href="/">Home</a>
-			<a id="add-item" href="">Add</a>
 			{% if user.is_authenticated %}
+			<a id="add-item" href="">Add</a>
 			<a id="logout-link" href="{% url 'logout' %}">Logout</a>
 			{% endif %}
         </div>

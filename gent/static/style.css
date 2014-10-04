@@ -166,3 +166,12 @@ h2 + ul.tags				{ margin-top: .5em; }
 .autocomplete-suggestion.autocomplete-selected span.desc	{ color: rgba(255, 255, 255, 0.4); }
 .autocomplete-suggestion.autocomplete-selected a	{ color: #fff; }
 .autocomplete-suggestion.autocomplete-selected a:hover	{ color: #fff; }
+
+
+/* Login form */
+
+#login-form label						{ font-size: .9em; color: #888; width: 90px; display: inline-block; margin-right: 10px; }
+#login-form input[type=text]			{ font-size: 1em; padding: 3px 6px; border: solid 1px #bbb; border-radius: 3px; margin-bottom: .25em; }
+#login-form input[type=password]		{ font-size: 1em; padding: 3px 6px; border: solid 1px #bbb; border-radius: 3px; margin-bottom: .25em; }
+#login-form input[type=submit]			{ margin: 0; margin-top: 1.5em; display: block; border: none; background: #729b62; color: #fff; font-size: .9em; border-radius: 5px; cursor: pointer; padding: 3px 12px 4px; -webkit-appearance: none; }
+#login-form input[type=submit]:hover	{ background: #000; }
