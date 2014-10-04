@@ -263,6 +263,36 @@ def ws_family(request):
 
     return JsonResponse(response)
 
+def ws_family_search(request):
+    query = request.GET.get('query', '')
+    suggestions = []
+
+    # Search for family by husband/wife name/id
+    families = Family.objects.filter(
+                Q(husband_name__icontains=query)
+                | Q(husband_id__icontains=query)
+                | Q(wife_name__icontains=query)
+                | Q(wife_id__icontains=query)
+                ).distinct().order_by('husband_name', 'wife_name')
+
+    for family in families:
+        suggestions.append({
+            'value': family.html(),
+            'data': {
+                'id': family.id,
+                'subtitle': ' / '.join([family.husband_id, family.wife_id]),
+            },
+        })
+
+    if query:
+        response = {
+            'query': query,
+            'suggestions': suggestions,
+        }
+    else:
+        response = { 'status': 500, 'message': "No query" }
+
+    return JsonResponse(response)
 
 def logout(request):
     return logout_then_login(request)

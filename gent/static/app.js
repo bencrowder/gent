@@ -130,8 +130,6 @@ $(document).ready(function() {
 					datecompleted: dateCompleted,
 				},
 				success: function(data) {
-					console.log(data);
-
 					// Close modal
 					$("form#edit-item-modal").slideUp(200);
 					$(".background").fadeOut(200);
@@ -170,8 +168,6 @@ $(document).ready(function() {
 				url: url,
 				method: "DELETE",
 				success: function(data) {
-					console.log(data);
-
 					// Close modal
 					$("form#delete-item-modal").slideUp(200);
 					$(".background").fadeOut(200);
@@ -226,8 +222,6 @@ $(document).ready(function() {
 					datecreated: dateCreated,
 				},
 				success: function(data) {
-					console.log(data);
-
 					// Close modal
 					$("form#edit-family-modal").slideUp(200);
 					$(".background").fadeOut(200);
@@ -265,8 +259,6 @@ $(document).ready(function() {
 				url: url,
 				method: "DELETE",
 				success: function(data) {
-					console.log(data);
-
 					// Close modal
 					$("form#delete-family-modal").slideUp(200);
 					$(".background").fadeOut(200);
@@ -292,4 +284,58 @@ $(document).ready(function() {
 
 		return false;
 	});
+
+
+	// Autocomplete for family
+	var options = {
+		serviceUrl: '/ws/family/search/',
+		formatResult: function(suggestion, currentValue) {
+			var html = '<div id="' + suggestion.data.id + '"><label>' + suggestion.value + '</label>';
+			if (suggestion.data.subtitle) {
+				html += '<span class="desc">' + suggestion.data.subtitle + '</span>';
+			}
+			html += '</div>';
+			return html;
+		},
+		onSelect: function(suggestion) {
+			familyBox = $(".family-box");
+
+			// Hide input
+			familyBox.hide();
+
+			// Clear it out
+			familyBox.val('');
+
+			// Update the value
+			familyBox.siblings("input[name=family]").val(suggestion.data.id);
+
+			// Update the family display box
+			familyBox.siblings("div.family-display").find("div").html(suggestion.value);
+
+			// Show the family display box
+			familyBox.siblings("div.family-display").show();
+
+			return false;
+		},
+		triggerSelectOnValidInput: false,
+	};
+
+	$(".family-box").autocomplete(options);
+
+
+	// Family display
+	$(".family-display a.delete").on("click", function() {
+		var displayBox = $(this).parents(".family-display");
+
+		// Clear out the value (because the user wants to type a new family in)
+		displayBox.siblings("input[name=family]").val();
+
+		// Hide the display box
+		displayBox.hide();
+
+		// Show the input and focus on it
+		displayBox.siblings("input[name=family-box]").show().focus();
+
+		return false;
+	});	
 });

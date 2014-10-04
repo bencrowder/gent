@@ -8,6 +8,8 @@ a:hover						{ color: #000; }
 
 .container					{ width: 90%; max-width: 550px; margin: 0px auto; }
 
+.hidden						{ display: none; }
+
 
 /* Home */
 
@@ -93,7 +95,6 @@ section#notes				{ margin-top: 1.5em; }
 #notes ul:last-child		{ margin-bottom: 0; }
 #notes p					{ margin: .75em 0; }
 #notes ul					{ margin: .75em 0; }
-#notes-text.hidden			{ display: none; }
 
 
 /* Section */
@@ -150,6 +151,22 @@ h2 + ul.tags				{ margin-top: .5em; }
 #controls span:hover		{ color: #000; }
 #controls span.edit			{ float: left; }
 #controls span.delete		{ float: right; }
+
+
+/* Family display box and autocomplete */
+
+.family-display				{ background: #3e639b; color: #fff; border-radius: 3px; padding: .2em .5em .3em; }
+.family-display div			{ display: inline; }
+.family-display span		{ color: rgba(255, 255, 255, 0.4); }
+.family-display .delete		{ float: right; margin-left: .5em; color: rgba(255, 255, 255, 0.5); }
+
+.autocomplete-suggestions	{ background: #fff; border: solid 1px #bbb; box-shadow: 0 1px 1px #bebebe; }
+.autocomplete-suggestion	{ border-top: solid 1px #bbb; padding: .3em .5em .4em; cursor: pointer; }
+.autocomplete-suggestion span.desc	{ display: block; font-size: .7em; color: rgba(0, 0, 0, 0.4); }
+.autocomplete-suggestion.autocomplete-selected	{ background: #111; color: #fff; }
+.autocomplete-suggestion.autocomplete-selected span.desc	{ color: rgba(255, 255, 255, 0.4); }
+.autocomplete-suggestion.autocomplete-selected a	{ color: #fff; }
+.autocomplete-suggestion.autocomplete-selected a:hover	{ color: #fff; }
 
 
 /* Media queries */
