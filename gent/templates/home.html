@@ -1,6 +1,18 @@
 {% extends '_base.html' %}
 
 {% block content %}
+
+{# New user #}
+{% if not tags and not recent_families and not recent_items and not top_families %}
+<section class="new-user">
+	<h2 class="container">Welcome!</h2>
+
+	<div class="container">
+		To get started, click on the green Add button above.
+	</div>
+</section>
+{% endif %}
+
 {% if tags %}
 <section class="home">
 	<h2 class="container">Top Tags</h2>
@@ -47,7 +59,7 @@
 </section>
 {% endif %}
 
-{% if largest_families %}
+{% if top_families %}
 <section class="home">
 	<h2 class="container">Top Families</h2>
 
