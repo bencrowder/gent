@@ -369,4 +369,16 @@ $(document).ready(function() {
 
 		return false;
 	});	
+
+
+	// General shortcuts
+	Mousetrap.bind('h', function() {
+		window.location.href = '/';
+		return false;
+	});
+
+	Mousetrap.bind('/', function() {
+		$("input#q").focus();
+		return false;
+	});
 });
