@@ -18,6 +18,7 @@ def home(request):
     families = set()
     families_add = families.add
     recent_families = [i.family for i in items if not (i.family in families or families_add(i.family))]
+    recent_families = recent_families[:3]
 
     # Get list of recent items
     recent_items = Item.objects.all().order_by('-date_created')[:3]
