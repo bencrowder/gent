@@ -70,6 +70,7 @@ $(document).ready(function() {
 		if ($("form#add-modal:visible").length) {
 			// Submit add modal
 			$("form#add-modal").submit();
+			return false;
 		}
 	});
 
