@@ -29,6 +29,12 @@ class Family(models.Model):
     def incomplete_items(self):
         return self.items.filter(completed=False).order_by('order')
 
+    # Return incomplete items label
+    def incomplete_items_label(self):
+        num_items = len(self.incomplete_items())
+
+        return '{} item{}'.format(num_items, 's' if num_items != 1 else '')
+
     # Return completed items
     def completed_items(self):
         return self.items.filter(completed=True).order_by('-date_completed')

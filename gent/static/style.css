@@ -166,11 +166,3 @@ h2 + ul.tags				{ margin-top: .5em; }
 .autocomplete-suggestion.autocomplete-selected span.desc	{ color: rgba(255, 255, 255, 0.4); }
 .autocomplete-suggestion.autocomplete-selected a	{ color: #fff; }
 .autocomplete-suggestion.autocomplete-selected a:hover	{ color: #fff; }
-
-
-/* Media queries */
-@media screen and (min-width: 700px) {
-	ul.families				{ padding-top: 1em; padding-bottom: 1em; }
-	ul.items				{ padding-top: 1em; padding-bottom: 1em; }
-}
-
