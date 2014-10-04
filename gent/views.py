@@ -42,16 +42,16 @@ def search(request):
     tag_list = []
     tag_search = False
 
-    # Special case for tag searching
-    if query[0:4] == 'tag:':
-        tag_search = True
-        tag = query[4:]
-
-    if query[0] == '#':
-        tag_search = True
-        tag = query[1:]
-
     if query:
+        # Special case for tag searching
+        if query[0:4] == 'tag:':
+            tag_search = True
+            tag = query[4:]
+
+        if query[0] == '#':
+            tag_search = True
+            tag = query[1:]
+
         if tag_search:
             family_list = Family.objects.filter(tags__name=tag).distinct().order_by('husband_name', 'wife_name')
 
