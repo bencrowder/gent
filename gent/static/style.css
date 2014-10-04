@@ -1,4 +1,4 @@
-body						{ margin: 0; padding: 0; background: #222; }
+body						{ margin: 0; padding: 0; background: #222; padding-bottom: 7em; }
 body *						{ font-family: Source Sans Pro; }
 
 *							{ -moz-box-sizing: border-box; box-sizing: border-box; }
