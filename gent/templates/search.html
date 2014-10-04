@@ -1,22 +1,22 @@
 {% extends '_base.html' %}
 
 {% block content %}
-{% if targets|length == 0 and items|length == 0 and tags|length == 0 %}
+{% if families|length == 0 and items|length == 0 and tags|length == 0 %}
 <section class="results">
 	<h2 class="container">No results.</h2>
 </section>
 {% else %}
 
-{% if targets|length %}
+{% if families|length %}
 <section class="results">
-	<h2 class="container">Matching Targets</h2>
+	<h2 class="container">Matching Families</h2>
 
-	<ul class="targets">
-		{% for target in targets %}
+	<ul class="families">
+		{% for family in families %}
 		<li class="container">
-			<a href="/target/{{ target.id }}/">
-				<label>{{ target }}</label>
-				<div class="sub">{{ target.incomplete_items.all|length }} items</div>
+			<a href="/family/{{ family.id }}/">
+				<label>{{ family }}</label>
+				<div class="sub">{{ family.incomplete_items.all|length }} items</div>
 			</a>
 		</li>
 		{% endfor %}
@@ -31,9 +31,9 @@
 	<ul class="items">
 		{% for item in items %}
 		<li class="container">
-			<a href="/target/{{ item.target.id }}/">
+			<a href="/family/{{ item.family.id }}/">
 				<label>{{ item.title }}</label>
-				<div class="sub">{{ item.target }}</div>
+				<div class="sub">{{ item.family }}</div>
 			</a>
 		</li>
 		{% endfor %}

@@ -7,14 +7,14 @@ class Tag(models.Model):
         return self.name
 
 
-class Target(models.Model):
+class Family(models.Model):
     husband_name = models.CharField('Husband: Name', max_length=250, blank=True)
     husband_id = models.CharField('Husband: FamilyTree ID', max_length=50, blank=True)
     wife_name = models.CharField('Wife: Name', max_length=250, blank=True)
     wife_id = models.CharField('Wife: FamilyTree ID', max_length=50, blank=True)
     notes = models.TextField(blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
-    tags = models.ManyToManyField(Tag, related_name='targets', blank=True, null=True)
+    tags = models.ManyToManyField(Tag, related_name='families', blank=True, null=True)
 
     def __str__(self):
         return ' & '.join([self.husband_name, self.wife_name])
@@ -30,7 +30,7 @@ class Target(models.Model):
 
 class Item(models.Model):
     title = models.CharField(max_length=500)
-    target = models.ForeignKey(Target, related_name='items')
+    family = models.ForeignKey(Family, related_name='items')
 
     completed = models.BooleanField(default=False)
     date_completed = models.DateTimeField(blank=True, null=True)

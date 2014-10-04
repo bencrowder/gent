@@ -52,15 +52,15 @@ ul.items.completed > li a:hover	{ color: #000; }
 ul.items li.placeholder		{ height: 2em; background: rgba(0, 0, 0, 0.1); border: dotted 1px #999; box-shadow: none; }
 
 
-/* Target page */
+/* Family page */
 
-#target-header h2			{ font-weight: 400; margin: 0; font-size: 1.2em; line-height: 1.1em; }
-#target-header h2 span		{ display: block; font-size: .7em; color: #ddd; margin-top: .1em; }
-#target-header h2 span a	{ color: #7db3dd; }
-#target-header h2 span a:hover	{ color: #000; }
-#target-header h2 + h2		{ margin-top: .5em; }
+#family-header h2			{ font-weight: 400; margin: 0; font-size: 1.2em; line-height: 1.1em; }
+#family-header h2 span		{ display: block; font-size: .7em; color: #ddd; margin-top: .1em; }
+#family-header h2 span a	{ color: #7db3dd; }
+#family-header h2 span a:hover	{ color: #000; }
+#family-header h2 + h2		{ margin-top: .5em; }
 
-#target-header + ul			{ margin-top: 1.25em; }
+#family-header + ul			{ margin-top: 1.25em; }
 
 
 /* Item page */
@@ -94,15 +94,15 @@ section:first-child			{ margin-top: 0; }
 section h2					{ font-weight: 400; font-size: 1em; line-height: 1.1em; color: #6993b4; margin-bottom: .2em !important; }
 
 
-/* Targets */
+/* Families */
 
-ul.targets					{ padding: 0; list-style: none; font-size: 1.1em; margin-top: .45em; }
-ul.targets > li				{ list-style: none; cursor: pointer; }
-ul.targets > li + li		{ margin-top: .5em; }
-ul.targets > li > a			{ display: block; padding: .5em .6em; background: #3e639b; border-radius: 5px; box-shadow: 0 1px 1px #777; color: #fff; }
-ul.targets > li > a:hover	{ background: #000; }
-ul.targets > li > a label		{ display: block; line-height: 1.1em; color: #fff; cursor: pointer; }
-ul.targets > li > a div.sub		{ font-size: .8em; color: rgba(255, 255, 255, 0.4); line-height: 1.2em; margin-top: 3px; }
+ul.families					{ padding: 0; list-style: none; font-size: 1.1em; margin-top: .45em; }
+ul.families > li			{ list-style: none; cursor: pointer; }
+ul.families > li + li		{ margin-top: .5em; }
+ul.families > li > a		{ display: block; padding: .5em .6em; background: #3e639b; border-radius: 5px; box-shadow: 0 1px 1px #777; color: #fff; }
+ul.families > li > a:hover	{ background: #000; }
+ul.families > li > a label	{ display: block; line-height: 1.1em; color: #fff; cursor: pointer; }
+ul.families > li > a div.sub	{ font-size: .8em; color: rgba(255, 255, 255, 0.4); line-height: 1.2em; margin-top: 3px; }
 
 
 /* Tags */
@@ -125,7 +125,7 @@ h2 + ul.tags				{ margin-top: .5em; }
 
 /* Media queries */
 @media screen and (min-width: 700px) {
-	ul.targets				{ padding-top: 1em; padding-bottom: 1em; }
+	ul.families				{ padding-top: 1em; padding-bottom: 1em; }
 	ul.items				{ padding-top: 1em; padding-bottom: 1em; }
 }
 

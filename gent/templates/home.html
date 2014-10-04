@@ -12,14 +12,14 @@
 </section>
 
 <section class="home">
-	<h2 class="container">Recent Targets</h2>
+	<h2 class="container">Recent Families</h2>
 
-	<ul class="targets">
-		{% for target in recent_targets %}
+	<ul class="families">
+		{% for family in recent_families %}
 		<li class="container">
-			<a href="{% url "target" target.id %}">
-				<label>{{ target }}</label>
-				<div class="sub">{{ target.incomplete_items.all|length }} items, {{ target.incomplete_items.0.date_created|date:"j M Y" }}</div>
+			<a href="{% url "family" family.id %}">
+				<label>{{ family }}</label>
+				<div class="sub">{{ family.incomplete_items.all|length }} items, {{ family.incomplete_items.0.date_created|date:"j M Y" }}</div>
 			</a>
 		</li>
 		{% endfor %}
@@ -34,7 +34,7 @@
 		<li class="container">
 			<a href="{% url "item" item.id %}">
 				<label>{{ item.title }}</label>
-				<div class="sub">{{ item.target }}</div>
+				<div class="sub">{{ item.family }}</div>
 			</a>
 		</li>
 		{% endfor %}
@@ -42,14 +42,14 @@
 </section>
 
 <section class="home">
-	<h2 class="container">Top Targets</h2>
+	<h2 class="container">Top Families</h2>
 
-	<ul class="targets">
-		{% for target in largest_targets %}
+	<ul class="families">
+		{% for family in largest_families %}
 		<li class="container">
-			<a href="/target/{{ target.id }}/">
-				<label>{{ target }}</label>
-				<div class="sub">{{ target.incomplete_items.all|length }} items</div>
+			<a href="/family/{{ family.id }}/">
+				<label>{{ family }}</label>
+				<div class="sub">{{ family.incomplete_items.all|length }} items</div>
 			</a>
 		</li>
 		{% endfor %}

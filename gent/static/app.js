@@ -11,7 +11,7 @@ $(document).ready(function() {
 			}
 
 			$.ajax({
-				url: '/ws/target/update-item-order/?order=' + order,
+				url: '/ws/family/update-item-order/?order=' + order,
 				method: 'POST',
 				success: function(data) {
 				},

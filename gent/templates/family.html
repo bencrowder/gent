@@ -3,16 +3,16 @@
 {% load markdown %}
 
 {% block content %}
-<div id="target-header" class="container">
+<div id="family-header" class="container">
 	<h2>
-		<label>{{ target.husband_name }} &amp; {{ target.wife_name }}</label>
-		<span><a href="https://familysearch.org/tree/#view=ancestor&person={{ target.husband_id }}">{{ target.husband_id }}</a> / <a href="https://familysearch.org/tree/#view=ancestor&person={{ target.wife_id }}">{{ target.wife_id }}</a></span>
+		<label>{{ family.husband_name }} &amp; {{ family.wife_name }}</label>
+		<span><a href="https://familysearch.org/tree/#view=ancestor&person={{ family.husband_id }}">{{ family.husband_id }}</a> / <a href="https://familysearch.org/tree/#view=ancestor&person={{ family.wife_id }}">{{ family.wife_id }}</a></span>
 	</h2>
 </div>
 
-{% if target.incomplete_items|length %}
+{% if family.incomplete_items|length %}
 <ul class="items sortable">
-	{% for item in target.incomplete_items %}
+	{% for item in family.incomplete_items %}
 	<li class="container" data-id="{{ item.id }}">
 		<a href="{% url "item" item.id %}">
 			<label>{{ item.title }}</label>
@@ -23,34 +23,34 @@
 </ul>
 {% endif %}
 
-{% if target.notes %}
+{% if family.notes %}
 <section id="notes">
 	<h2 class="container">Notes</h2>
 
 	<div class="content container">
-		{{ target.notes|markdown }}
+		{{ family.notes|markdown }}
 	</div>
 </section>
 {% endif %}
 
-{% if target.tags.all|length %}
+{% if family.tags.all|length %}
 <section>
 	<h2 class="container">Tags</h2>
 
 	<ul class="tags container">
-		{% for tag in target.tags.all %}
+		{% for tag in family.tags.all %}
 		<li><a href="/search/?q=tag:{{ tag }}">#{{ tag }}</a></li>
 		{% endfor %}
 	</ul>
 </section>
 {% endif %}
 
-{% if target.completed_items|length %}
+{% if family.completed_items|length %}
 <section>
 	<h2 class="container">Completed</h2>
 
 	<ul class="items completed">
-		{% for item in target.completed_items %}
+		{% for item in family.completed_items %}
 		<li class="container">
 			<a href="{% url "item" item.id %}">{{ item.title }}</a>
 		</li>
