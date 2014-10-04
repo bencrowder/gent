@@ -1,6 +1,7 @@
 {% extends '_base.html' %}
 
 {% block content %}
+{% if tags %}
 <section class="home">
 	<h2 class="container">Top Tags</h2>
 
@@ -10,7 +11,9 @@
 		{% endfor %}
 	</ul>
 </section>
+{% endif %}
 
+{% if recent_families %}
 <section class="home">
 	<h2 class="container">Recent Families</h2>
 
@@ -25,7 +28,9 @@
 		{% endfor %}
 	</ul>
 </section>
+{% endif %}
 
+{% if recent_items %}
 <section class="home">
 	<h2 class="container">Recent Items</h2>
 
@@ -40,7 +45,9 @@
 		{% endfor %}
 	</ul>
 </section>
+{% endif %}
 
+{% if largest_families %}
 <section class="home">
 	<h2 class="container">Top Families</h2>
 
@@ -55,4 +62,6 @@
 		{% endfor %}
 	</ul>
 </section>
+{% endif %}
+
 {% endblock content %}
