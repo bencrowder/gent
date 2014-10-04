@@ -13,7 +13,7 @@
 <section>
 	<h2 class="container">Family</h2>
 	<div class="content container">
-		<a href="{% url "family" item.family.id %}">{{ item.family }}</a>
+		<a class="family-link" href="{% url "family" item.family.id %}">{{ item.family.html|safe }}</a>
 	</div>
 </section>
 

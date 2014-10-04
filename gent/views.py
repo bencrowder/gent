@@ -73,7 +73,7 @@ def search(request):
     return render(request, 'search.html', {'user': request.user, 'title': '{} - Gent'.format(query), 'families': family_list, 'items': item_list, 'tags': tag_list, 'query': query})
 
 #@login_required()
-def family(request, familyid):
+def family(request, family_id):
     # Get family
     family = Family.objects.get(id=family_id)
 

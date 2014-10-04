@@ -33,7 +33,7 @@
 		{% for family in recent_families %}
 		<li class="container">
 			<a href="{% url "family" family.id %}">
-				<label>{{ family }}</label>
+				<label>{{ family.html|safe }}</label>
 				<div class="sub">{{ family.incomplete_items.all|length }} items, {{ family.incomplete_items.0.date_created|date:"j M Y" }}</div>
 			</a>
 		</li>
@@ -51,7 +51,7 @@
 		<li class="container">
 			<a href="{% url "item" item.id %}">
 				<label>{{ item.title }}</label>
-				<div class="sub">{{ item.family }}</div>
+				<div class="sub">{{ item.family.html|safe }}</div>
 			</a>
 		</li>
 		{% endfor %}
@@ -67,7 +67,7 @@
 		{% for family in top_families %}
 		<li class="container">
 			<a href="/family/{{ family.id }}/">
-				<label>{{ family }}</label>
+				<label>{{ family.html|safe }}</label>
 				<div class="sub">{{ family.incomplete_items.all|length }} items</div>
 			</a>
 		</li>

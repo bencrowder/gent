@@ -17,7 +17,10 @@ class Family(models.Model):
     tags = models.ManyToManyField(Tag, related_name='families', blank=True, null=True)
 
     def __str__(self):
-        return ' & '.join([self.husband_name, self.wife_name])
+        return ' / '.join([self.husband_name, self.wife_name])
+
+    def html(self):
+        return ' <span>/</span> '.join([self.husband_name, self.wife_name])
 
     # Return incomplete items
     def incomplete_items(self):

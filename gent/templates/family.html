@@ -5,7 +5,7 @@
 {% block content %}
 <div id="family-header" class="container">
 	<h2>
-		<label>{{ family.husband_name }} &amp; {{ family.wife_name }}</label>
+		<label>{{ family.html|safe }}</label>
 		<span><a href="https://familysearch.org/tree/#view=ancestor&person={{ family.husband_id }}">{{ family.husband_id }}</a> / <a href="https://familysearch.org/tree/#view=ancestor&person={{ family.wife_id }}">{{ family.wife_id }}</a></span>
 	</h2>
 </div>
