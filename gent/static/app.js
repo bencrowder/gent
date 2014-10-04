@@ -64,16 +64,18 @@ $(document).ready(function() {
 
 		var title = $("textarea[name=title]").val().trim();
 		var family = $("input[name=family]").val().trim();
+		var familyBox = $("input[name=family-box]").val().trim();
 		var notes = $("textarea[name=notes]").val().trim();
 		var tags = $("input[name=tags]").val().trim();
 
-		if (title != '' && family != '') {
+		if (title != '' && (family != '' || familyBox != '')) {
 			$.ajax({
 				url: url,
 				method: "POST",
 				data: {
 					title: title,
 					family: family,
+					family_box: familyBox,
 					tags: tags,
 					notes: notes,
 				},
@@ -110,6 +112,7 @@ $(document).ready(function() {
 		var itemId = $("#item-header").attr("data-id");
 		var title = $(this).find("textarea[name=title]").val().trim();
 		var family = $(this).find("input[name=family]").val().trim();
+		var familyBox = $("input[name=family-box]").val().trim();
 		var notes = $(this).find("textarea[name=notes]").val().trim();
 		var tags = $(this).find("input[name=tags]").val().trim();
 		var dateCreated = $(this).find("input[name=datecreated]").val();
@@ -123,6 +126,7 @@ $(document).ready(function() {
 				method: "PUT",
 				data: {
 					family: family,
+					family_box: familyBox,
 					title: title,
 					tags: tags,
 					notes: notes,

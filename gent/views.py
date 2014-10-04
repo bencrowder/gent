@@ -122,6 +122,7 @@ def ws_toggle_item_complete(request):
 
 def ws_item(request):
     item_id = request.GET.get('item_id', '')
+    family = None
 
     # Special case for PUT
     req = None
@@ -133,6 +134,7 @@ def ws_item(request):
     if req:
         title = req.get('title', '')
         family_id = req.get('family', '')
+        family_name = req.get('family_box', '')
         datecreated = req.get('datecreated', '')
         datecompleted = req.get('datecompleted', '')
         notes = req.get('notes', '')
@@ -145,16 +147,36 @@ def ws_item(request):
                 obj, created = Tag.objects.get_or_create(name=tag)
                 tags.append(obj)
 
+        # If new family
+        if family_id == '' and family_name != '':
+            try:
+                husband, wife = family_name.split('/')
+                if husband.strip() != '':
+                    husband = husband.strip()
+                else:
+                    husband = None
+
+                if wife.strip() != '':
+                    wife = wife.strip()
+                else:
+                    husband = None
+
+                family = Family(husband_name=husband, wife_name=wife)
+                family.save()
+            except e:
+                print e
+
     if item_id:
         item = Item.objects.get(id=item_id)
 
     if request.method == 'POST':
         # New item
-        if title == '' or family_id == '':
+        if title == '' or (family_id == '' and family is None):
             response = { 'status': 501, 'message': "Missing title or family" }
         else:
             try:
-                family = Family.objects.get(id=family_id)
+                if family is None:
+                    family = Family.objects.get(id=family_id)
                 item = Item(title=title, family=family, notes=notes)
                 item.save()
                 item.tags = tags
@@ -166,11 +188,12 @@ def ws_item(request):
 
     elif request.method == 'PUT':
         # Update item
-        if title == '' or family_id == '':
+        if title == '' or (family_id == '' and family is None):
             response = { 'status': 501, 'message': "Missing title or family" }
         else:
             try:
-                family = Family.objects.get(id=family_id)
+                if family is None:
+                    family = Family.objects.get(id=family_id)
 
                 item.title = title
                 item.family = family
