@@ -3,7 +3,7 @@
 {% load markdown %}
 
 {% block content %}
-<div id="family-header" class="container">
+<div id="family-header" class="container" data-id="{{ family.id }}">
 	<h2>
 		<label>{{ family.html|safe }}</label>
 		<span><a href="https://familysearch.org/tree/#view=ancestor&person={{ family.husband_id }}">{{ family.husband_id }}</a> / <a href="https://familysearch.org/tree/#view=ancestor&person={{ family.wife_id }}">{{ family.wife_id }}</a></span>
@@ -59,4 +59,48 @@
 </section>
 {% endif %}
 
+<section id="controls" class="container">
+	<span id="edit-family-link" class="edit">Edit</span>
+	<span id="delete-family-link" class="delete">Delete</span>
+</section>
+
 {% endblock content %}
+
+{% block modals %}
+<form id="edit-family-modal" class="modal" data-id="{{ family.id }}">
+	<a class="cancel-link">Cancel</a>
+	<h2>Edit Family</h2>
+
+	<label>Husband Name</label>
+	<input type="text" id="edit-husband-name" name="husband-name" value="{{ family.husband_name }}" />
+
+	<label>Husband ID</label>
+	<input type="text" id="edit-husband-id" name="husband-id" value="{{ family.husband_id }}" />
+
+	<label>Wife Name</label>
+	<input type="text" id="edit-wife-name" name="wife-name" value="{{ family.wife_name }}" />
+
+	<label>Wife ID</label>
+	<input type="text" id="edit-wife-id" name="wife-id" value="{{ family.wife_id }}" />
+
+	<label>Notes</label>
+	<textarea id="edit-notes" name="notes">{{ family.notes }}</textarea>
+
+	<label>Tags</label>
+	<input type="text" id="edit-tags" name="tags" value="{{ family.tags.all|join:", " }}" />
+
+	<label>Date Created</label>
+	<input type="date" id="edit-date-created" name="datecreated" value="{{ family.date_created|date:"Y-m-d" }}" />
+
+	<input type="submit" value="Save Changes" />
+</form>
+
+<form id="delete-family-modal" class="modal" data-id="{{ family.id }}">
+	<a class="cancel-link">No, whoops, so sorry</a>
+	<h2>Delete Family</h2>
+
+	<p>Are you really, really sure you want to send this family to the chopping block?</p>
+
+	<input type="submit" value="Heck Yes" />
+</form>
+{% endblock modals %}

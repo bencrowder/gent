@@ -51,39 +51,38 @@
 {% endif %}
 
 <section id="controls" class="container">
-	<span id="edit-link">Edit</span>
-	<span id="delete-link">Delete</span>
+	<span id="edit-item-link" class="edit">Edit</span>
+	<span id="delete-item-link" class="delete">Delete</span>
 </section>
 
 {% endblock content %}
 
 {% block modals %}
-<form id="edit-modal" class="modal">
+<form id="edit-item-modal" class="modal" data-id="{{ item.id }}">
 	<a class="cancel-link">Cancel</a>
 	<h2>Edit Item</h2>
 
-	<label>Title</label>
-	<textarea type="text" id="edit-title" name="title"></textarea>
+	<textarea type="text" id="edit-title" name="title">{{ item.title }}</textarea>
 
 	<label>Family</label>
-	<input type="text" id="edit-family" name="family" />
+	<input type="text" id="edit-family" name="family" value="{{ item.family.id }}" />
 
 	<label>Notes</label>
-	<textarea id="edit-notes" name="notes"></textarea>
+	<textarea id="edit-notes" name="notes">{{ item.notes }}</textarea>
 
 	<label>Tags</label>
-	<input type="text" id="edit-tags" name="tags" />
+	<input type="text" id="edit-tags" name="tags" value="{{ item.tags.all|join:", " }}"/>
 
 	<label>Date Created</label>
-	<input type="date" id="edit-date-created" name="datecreated" />
+	<input type="date" id="edit-date-created" name="datecreated" value="{{ item.date_created|date:"Y-m-d" }}"/>
 
 	<label>Date Completed</label>
-	<input type="date" id="edit-date-completed" name="datecompleted" />
+	<input type="date" id="edit-date-completed" name="datecompleted" value="{{ item.date_completed|date:"Y-m-d" }}"/>
 
 	<input type="submit" value="Save Changes" />
 </form>
 
-<form id="delete-modal" class="modal">
+<form id="delete-item-modal" class="modal" data-id="{{ item.id }}">
 	<a class="cancel-link">No, whoops, so sorry</a>
 	<h2>Delete Item</h2>
 

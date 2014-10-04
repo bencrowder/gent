@@ -148,8 +148,8 @@ h2 + ul.tags				{ margin-top: .5em; }
 #controls					{ margin-top: 1.5em; border-top: solid 1px #ddd; padding-top: .5em; overflow: hidden; }
 #controls span				{ color: #1282da; display: inline-block; cursor: pointer; }
 #controls span:hover		{ color: #000; }
-#controls span#edit-link	{ float: left; }
-#controls span#delete-link	{ float: right; }
+#controls span.edit			{ float: left; }
+#controls span.delete		{ float: right; }
 
 
 /* Media queries */
