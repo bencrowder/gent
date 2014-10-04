@@ -1,0 +1,67 @@
+- model: gent.Tag
+  pk: 1
+  fields:
+    name: birth
+- model: gent.Tag
+  pk: 2
+  fields:
+    name: marriage
+- model: gent.Tag
+  pk: 3
+  fields:
+    name: death
+- model: gent.Tag
+  pk: 4
+  fields:
+    name: new-york
+- model: gent.Tag
+  pk: 5
+  fields:
+    name: virginia
+- model: gent.Tag
+  pk: 6
+  fields:
+    name: source
+- model: gent.Family
+  pk: 1
+  fields:
+    husband_name: William Holdaway
+    husband_id: LCXD-019
+    wife_name: Alice Yarrow
+    wife_id: LPEX-737
+    notes: "Test notes for William and Alice, married 1790."
+    date_created: "2014-10-02"
+    tags: [ 5, 6 ]
+- model: gent.Family
+  pk: 2
+  fields:
+    husband_name: Timothy Ox
+    husband_id: LOWN-642
+    wife_name: Mary Smith
+    wife_id: LQYU-554
+    notes: "Test notes for Timothy Ox and Mary Smith.\n\n- Bullet list\n- More bullets\n\nFinal paragraph."
+    date_created: "2014-10-03"
+    tags: [ 5 ]
+- model: gent.Item
+  pk: 1
+  fields:
+    title: "Find William's birth record"
+    family: 1
+    tags: [ 1 ]
+    date_created: "2014-10-03"
+    notes: "Maybe look in the 1750–1775 birth registers?"
+- model: gent.Item
+  pk: 2
+  fields:
+    title: "Find Alice's birth record"
+    family: 1
+    tags: [ 1 ]
+    date_created: "2014-10-03"
+    notes: "Maybe look in the 1750–1775 birth registers?"
+- model: gent.Item
+  pk: 3
+  fields:
+    title: "Find marriage record"
+    family: 2
+    date_created: "2014-10-03"
+    tags: [ 2 ]
