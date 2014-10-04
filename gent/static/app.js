@@ -46,7 +46,11 @@ $(document).ready(function() {
 
 
 	// Add item
-	$("#add-item").on("click", function(e) {
+	$("#add-item").on("click", showAddItemModal);
+
+	Mousetrap.bind('ctrl+enter', showAddItemModal);
+
+	function showAddItemModal() {
 		// Clear out form
 		$("form#add-modal textarea[name=title]").val('');
 		$("form#add-modal input[name=family]").val('');
@@ -55,8 +59,16 @@ $(document).ready(function() {
 
 		$(".background").fadeIn(200);
 		$("form#add-modal").slideDown(200);
+		$("form#add-modal textarea[name=title]").focus();
 
 		return false;
+	}
+
+	Mousetrap.bindGlobal('shift+return', function(e) {
+		if ($("form#add-modal:visible").length) {
+			// Submit add modal
+			$("form#add-modal").submit();
+		}
 	});
 
 	$("#add-modal").on("submit", function(e) {
@@ -102,6 +114,7 @@ $(document).ready(function() {
 	$("#edit-item-link").on("click", function(e) {
 		$(".background").fadeIn(200);
 		$("form#edit-item-modal").slideDown(200);
+		$("form#edit-item-modal textarea[name=title]").focus();
 
 		return false;
 	});
@@ -287,6 +300,15 @@ $(document).ready(function() {
 		$(".background").fadeOut(200);
 
 		return false;
+	});
+
+	$("form.modal").on("keyup", function(e) {
+		if (e.keyCode == 27) {
+			$(this).slideUp(200);
+			$(".background").fadeOut(200);
+
+			return false;
+		}
 	});
 
 
