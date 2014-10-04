@@ -21,7 +21,7 @@ def home(request):
     recent_families = recent_families[:3]
 
     # Get list of recent items
-    recent_items = Item.objects.all().order_by('-date_created')[:3]
+    recent_items = Item.objects.filter(completed=False).order_by('-date_created')[:3]
 
     # Get list of families with most todos
     # TODO: use # incomplete items instead
