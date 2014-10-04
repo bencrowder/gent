@@ -73,7 +73,7 @@ form.modal h2					{ margin: 0; font-size: 1.2em; font-weight: normal; margin-bot
 form.modal label				{ display: block; font-size: .9em; line-height: 1.1em; color: #6993b4; margin-bottom: .2em; margin-top: .75em; }
 form.modal input[type=text],
 	form.modal input[type=date]	{ font-size: 1em; padding: 3px 4px; border: solid 1px #bbb; border-radius: 3px; width: 100%; }
-form.modal textarea				{ font-size: .9em; padding: 3px 4px; border: solid 1px #bbb; border-radius: 3px; width: 100%; margin: 0; }
+form.modal textarea				{ font-size: 1em; padding: 3px 4px; border: solid 1px #bbb; border-radius: 3px; width: 100%; margin: 0; }
 
 form.modal input[type=submit]	{ display: block; margin-top: 1.5em; background: #5997d6; color: #fff; padding: 5px 10px 6px; border-radius: 3px; border: none; font-size: .9em; cursor: pointer; -webkit-appearance: none; }
 form.modal input[type=submit]:hover	{ background: #000; }
@@ -82,8 +82,7 @@ form.modal a.cancel-link			{ float: right; color: #888; text-decoration: none; f
 form.modal a.cancel-link:hover		{ color: #000; }
 
 form.modal textarea[name=title]	{ box-shadow: 0 2px 4px #aaa; padding: 6px 7px; line-height: 1.3em; font-size: 1.1em; height: 4em; }
-form.modal input[name=tags]	{ font-size: .9em; }
-
+form.modal input[name=tags]	{ font-size: 1em; }
 
 
 /* Notes */

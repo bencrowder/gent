@@ -3,7 +3,7 @@ from django.db import models
 class Tag(models.Model):
     name = models.CharField(max_length=250)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
 
@@ -19,7 +19,7 @@ class Family(models.Model):
     class Meta:
         verbose_name_plural = "families"
 
-    def __str__(self):
+    def __unicode__(self):
         return ' / '.join([self.husband_name, self.wife_name])
 
     def html(self):
@@ -46,5 +46,5 @@ class Item(models.Model):
     order = models.IntegerField(default=0)
     notes = models.TextField(blank=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title

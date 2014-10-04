@@ -75,16 +75,29 @@ def search(request):
 #@login_required()
 def family(request, family_id):
     # Get family
-    family = Family.objects.get(id=family_id)
+    try:
+        family = Family.objects.get(id=family_id)
 
-    return render(request, 'family.html', {'user': request.user, 'title': '{} - Gent'.format(family),'family': family})
+        if family:
+            return render(request, 'family.html', {'user': request.user, 'title': '{} - Gent'.format(family),'family': family})
+        else:
+            return render(request, '404.html', {'user': request.user, 'title': '404 - Gent'})
+    except e:
+        print e
+        return render(request, '500.html', {'user': request.user, 'title': '500 - Gent'})
 
 #@login_required()
 def item(request, item_id):
     # Get item 
-    item = Item.objects.get(id=item_id)
+    try:
+        item = Item.objects.get(id=item_id)
 
-    return render(request, 'item.html', {'user': request.user, 'title': '{} - Gent'.format(item),'item': item})
+        if item:
+            return render(request, 'item.html', {'user': request.user, 'title': '{} - Gent'.format(item),'item': item})
+        else:
+            return render(request, '404.html', {'user': request.user, 'title': '404 - Gent'})
+    except:
+        return render(request, '404.html', {'user': request.user, 'title': '404 - Gent'})
 
 def ws_update_item_order(request):
     order = request.GET.get('order', '')
@@ -151,17 +164,14 @@ def ws_item(request):
         if family_id == '' and family_name != '':
             try:
                 husband, wife = family_name.split('/')
+                args = {}
                 if husband.strip() != '':
-                    husband = husband.strip()
-                else:
-                    husband = None
+                    args['husband_name'] = husband.strip()
 
                 if wife.strip() != '':
-                    wife = wife.strip()
-                else:
-                    husband = None
+                    args['wife_name'] = wife.strip()
 
-                family = Family(husband_name=husband, wife_name=wife)
+                family = Family(**args)
                 family.save()
             except e:
                 print e
