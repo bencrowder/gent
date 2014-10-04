@@ -16,7 +16,7 @@
 	<li class="container" data-id="{{ item.id }}">
 		<a href="{% url "item" item.id %}">
 			<label>{{ item.title }}</label>
-			{% if item.notes %}<div id="notes" class="sub">{{ item.notes|markdown }}</div>{% endif %}
+			{% if item.notes %}<div id="notes" class="sub">Has notes</div>{% endif %}
 		</a>
 	</li>
 	{% endfor %}
