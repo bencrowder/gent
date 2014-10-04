@@ -16,6 +16,9 @@ class Family(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     tags = models.ManyToManyField(Tag, related_name='families', blank=True, null=True)
 
+    class Meta:
+        verbose_name_plural = "families"
+
     def __str__(self):
         return ' / '.join([self.husband_name, self.wife_name])
 
