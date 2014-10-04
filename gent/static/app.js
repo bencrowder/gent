@@ -61,6 +61,8 @@ $(document).ready(function() {
 		$("form#add-modal").slideDown(200);
 		$("form#add-modal textarea[name=title]").focus();
 
+		window.scrollTo(0, 0);
+
 		return false;
 	}
 
@@ -115,6 +117,8 @@ $(document).ready(function() {
 		$(".background").fadeIn(200);
 		$("form#edit-item-modal").slideDown(200);
 		$("form#edit-item-modal textarea[name=title]").focus();
+
+		window.scrollTo(0, 0);
 
 		return false;
 	});
