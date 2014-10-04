@@ -316,13 +316,17 @@ def ws_family_search(request):
                 ).distinct().order_by('husband_name', 'wife_name')
 
     for family in families:
-        suggestions.append({
+        suggestion = {
             'value': family.html(),
             'data': {
                 'id': family.id,
-                'subtitle': ' / '.join([family.husband_id, family.wife_id]),
             },
-        })
+        }
+
+        if family.husband_id and family.wife_id:
+            suggestion['date']['subtitle'] = ' / '.join([family.husband_id, family.wife_id])
+
+        suggestions.append(suggestion)
 
     if query:
         response = {
