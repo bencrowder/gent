@@ -44,5 +44,27 @@
 	<div id="body">
 		{% block content %}{% endblock content %}
 	</div>
+
+	<div class="background"></div>
+
+	<form id="add-modal" class="modal">
+		<a class="cancel-link">Cancel</a>
+		<h2>Add Item</h2>
+
+		<textarea type="text" id="add-title" name="title"></textarea>
+
+		<label>Family</label>
+		<input type="text" id="add-family" name="family" />
+
+		<label>Notes</label>
+		<textarea id="add-notes" name="notes"></textarea>
+
+		<label>Tags</label>
+		<input type="text" id="add-tags" name="tags" />
+
+		<input type="submit" value="Add Item" />
+	</form>
+
+	{% block modals %}{% endblock modals %}
 </body>
 </html>

@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^logout/$', 'gent.views.logout', name='logout'),
 
-    url(r'^ws/family/update-item-order/$', 'gent.views.ws_update_item_order', name='update_item_order'),
-    url(r'^ws/item/toggle-complete/$', 'gent.views.ws_toggle_item_complete', name='toggle_item_complete'),
+    url(r'^ws/family/update-item-order/$', 'gent.views.ws_update_item_order', name='ws_update_item_order'),
+    url(r'^ws/item/toggle-complete/$', 'gent.views.ws_toggle_item_complete', name='ws_toggle_item_complete'),
+    url(r'^ws/item/$', 'gent.views.ws_item', name='ws_item'),
 )

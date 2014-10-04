@@ -3,48 +3,43 @@
 {% load markdown %}
 
 {% block content %}
-<div id="item-header" class="container{% if item.completed %} completed{% endif %}" data-id="{{ item.id }}">
+<div id="item-header" class="container{% if item.completed %} completed{% endif %}" data-id="{{ item.id }}" data-family-url="{% url 'family' item.family.id %}">
 	<div class="checkbox"></div>
 	<h2>
-		<label>{{ item.title }}</label>
+		<label id="item-title">{{ item.title }}</label>
 	</h2>
 </div>
 
 <section>
 	<h2 class="container">Family</h2>
 	<div class="content container">
-		<a class="family-link" href="{% url "family" item.family.id %}">{{ item.family.html|safe }}</a>
+		<a class="family-link" data-id="{{ item.family.id }}" href="{% url "family" item.family.id %}">{{ item.family.html|safe }}</a>
 	</div>
 </section>
 
 {% if item.date_completed %}
 <section id="completed-container">
 	<h2 class="container">Completed</h2>
-	<div class="content container">
-		{{ item.date_completed|date:"j M Y" }}
-	</div>
+	<div class="content container" id="date-completed" data-date="{{ item.date_completed|date:"Y-m-d" }}">{{ item.date_completed|date:"j M Y" }}</div>
 </section>
 {% endif %}
 
 <section>
 	<h2 class="container">Created</h2>
-	<div class="content container">
-		{{ item.date_created|date:"j M Y" }}
-	</div>
+	<div class="content container" id="date-created" data-date="{{ item.date_created|date:"Y-m-d" }}">{{ item.date_created|date:"j M Y" }}</div>
 </section>
 
 {% if item.notes %}
 <section id="notes">
 	<h2 class="container">Notes</h2>
 
-	<div class="content container">
-		{{ item.notes|markdown }}
-	</div>
+	<div class="content container" id="item-notes">{{ item.notes|markdown }}</div>
+	<div id="notes-text" class="hidden">{{ item.notes }}</div>
 </section>
 {% endif %}
 
 {% if item.tags.all|length %}
-<section>
+<section id="item-tags" data-tags="{{ item.tags.all|join:", " }}">
 	<h2 class="container">Tags</h2>
 
 	<ul class="tags container">
@@ -61,3 +56,39 @@
 </section>
 
 {% endblock content %}
+
+{% block modals %}
+<form id="edit-modal" class="modal">
+	<a class="cancel-link">Cancel</a>
+	<h2>Edit Item</h2>
+
+	<label>Title</label>
+	<textarea type="text" id="edit-title" name="title"></textarea>
+
+	<label>Family</label>
+	<input type="text" id="edit-family" name="family" />
+
+	<label>Notes</label>
+	<textarea id="edit-notes" name="notes"></textarea>
+
+	<label>Tags</label>
+	<input type="text" id="edit-tags" name="tags" />
+
+	<label>Date Created</label>
+	<input type="date" id="edit-date-created" name="datecreated" />
+
+	<label>Date Completed</label>
+	<input type="date" id="edit-date-completed" name="datecompleted" />
+
+	<input type="submit" value="Save Changes" />
+</form>
+
+<form id="delete-modal" class="modal">
+	<a class="cancel-link">No, whoops, so sorry</a>
+	<h2>Delete Item</h2>
+
+	<p>Are you really, really sure you want to send this item to the chopping block?</p>
+
+	<input type="submit" value="Heck Yes" />
+</form>
+{% endblock modals %}

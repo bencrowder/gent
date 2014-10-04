@@ -120,6 +120,88 @@ def ws_toggle_item_complete(request):
 
     return JsonResponse(response)
 
+def ws_item(request):
+    item_id = request.GET.get('item_id', '')
+
+    # Special case for PUT
+    req = None
+    if request.method == 'POST':
+        req = request.POST
+    elif request.method == 'PUT':
+        req = QueryDict(request.body)
+
+    if req:
+        title = req.get('title', '')
+        family_id = req.get('family', '')
+        datecreated = req.get('datecreated', '')
+        datecompleted = req.get('datecompleted', '')
+        notes = req.get('notes', '')
+
+        # Load tags
+        tag_list = req.get('tags', '')
+        tags = []
+        for tag in tag_list.split(', '):
+            if tag != '':
+                obj, created = Tag.objects.get_or_create(name=tag)
+                tags.append(obj)
+
+    if item_id:
+        item = Item.objects.get(id=item_id)
+
+    if request.method == 'POST':
+        # New item
+        if title == '' or family_id == '':
+            response = { 'status': 501, 'message': "Missing title or family" }
+        else:
+            try:
+                family = Family.objects.get(id=family_id)
+                item = Item(title=title, family=family, notes=notes)
+                item.save()
+                item.tags = tags
+                item.save()
+
+                response = { 'status': 200, 'id': item.id }
+            except:
+                response = { 'status': 500, 'message': "Couldn't create new item" }
+
+    elif request.method == 'PUT':
+        # Update item
+        if title == '' or family_id == '':
+            response = { 'status': 501, 'message': "Missing title or family" }
+        else:
+            try:
+                family = Family.objects.get(id=family_id)
+
+                item.title = title
+                item.family = family
+                item.notes = notes
+
+                item.tags.clear()
+                for tag in tags:
+                    item.tags.add(tag)
+
+                item.date_created = datecreated
+
+                if datecompleted != '':
+                    item.date_completed = datecompleted
+                else:
+                    item.date_completed = None
+
+                item.save()
+
+                response = { 'status': 200 }
+            except e:
+                response = { 'status': 500, 'message': "Couldn't update item" }
+
+    elif request.method == 'DELETE':
+        try:
+            item.delete()
+            response = { 'status': 200 }
+        except e:
+            response = { 'status': 500, 'message': "Couldn't delete item" }
+
+    return JsonResponse(response)
+
 
 def logout(request):
     return logout_then_login(request)

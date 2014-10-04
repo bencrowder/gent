@@ -61,6 +61,29 @@ a:hover						{ color: #000; }
 .family-link span			{ color: rgba(18, 130, 218, 0.4); }
 
 
+/* Modal */
+
+.background						{ position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); z-index: 1000; display: none; }
+
+form.modal						{ background: #fff; border-radius: 5px; padding: 25px; position: absolute; top: 20px; left: 0; right: 0; width: 90%; max-width: 400px; z-index: 1200; display: none; margin: 0px auto; }
+form.modal h2					{ margin: 0; font-size: 1.2em; font-weight: normal; margin-bottom: .75em; }
+
+form.modal label				{ display: block; font-size: .9em; line-height: 1.1em; color: #6993b4; margin-bottom: .2em; margin-top: .75em; }
+form.modal input[type=text],
+	form.modal input[type=date]	{ font-size: 1em; padding: 3px 4px; border: solid 1px #bbb; border-radius: 3px; width: 100%; }
+form.modal textarea				{ font-size: .9em; padding: 3px 4px; border: solid 1px #bbb; border-radius: 3px; width: 100%; margin: 0; }
+
+form.modal input[type=submit]	{ display: block; margin-top: 1.5em; background: #5997d6; color: #fff; padding: 5px 10px 6px; border-radius: 3px; border: none; font-size: .9em; cursor: pointer; -webkit-appearance: none; }
+form.modal input[type=submit]:hover	{ background: #000; }
+
+form.modal a.cancel-link			{ float: right; color: #888; text-decoration: none; font-size: .8em; cursor: pointer; }
+form.modal a.cancel-link:hover		{ color: #000; }
+
+form.modal textarea[name=title]	{ box-shadow: 0 2px 4px #aaa; padding: 6px 7px; line-height: 1.3em; font-size: 1.1em; height: 4em; }
+form.modal input[name=tags]	{ font-size: .9em; }
+
+
+
 /* Notes */
 
 section#notes				{ margin-top: 1.5em; }
@@ -70,6 +93,7 @@ section#notes				{ margin-top: 1.5em; }
 #notes ul:last-child		{ margin-bottom: 0; }
 #notes p					{ margin: .75em 0; }
 #notes ul					{ margin: .75em 0; }
+#notes-text.hidden			{ display: none; }
 
 
 /* Section */
