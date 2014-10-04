@@ -38,13 +38,11 @@ a:hover						{ color: #000; }
 
 ul.items					{ padding: 0; list-style: none; font-size: 1.1em; margin-top: .45em; }
 ul.items > li				{ list-style: none; cursor: pointer; }
-ul.items > li > a			{ display: block; padding: .5em .6em; background: #745930; border-radius: 5px; line-height: 1.2em; box-shadow: 0 1px 3px #bbb; cursor: pointer; color: #fff; }
+ul.items > li > a			{ display: block; padding: .5em .6em; background: #745930; border-radius: 5px; line-height: 1.2em; box-shadow: 0 1px 1px #777; cursor: pointer; color: #fff; }
 ul.items > li > a:hover		{ background: #000; color: #fff; }
 ul.items > li + li			{ margin-top: .5em; }
 ul.items > li label			{ display: block; line-height: 1.1em; cursor: pointer; }
 ul.items > li div.sub		{ font-size: .8em; color: rgba(255, 255, 255, 0.4); line-height: 1.2em; margin-top: 3px; }
-
-ul.items.linkless > li 		{ display: block; padding: .5em .6em; background: #fff; border-radius: 5px; line-height: 1.2em; border: solid 1px #ddd; box-shadow: 0 1px 3px #ddd; }
 
 ul.items.completed			{ padding: 0; background: none; font-size: .8em; margin-top: .6em; }
 ul.items.completed > li	a	{ padding: 0; background: none; border: none; box-shadow: none; color: #aaa; text-decoration: line-through; }
@@ -101,7 +99,7 @@ section h2					{ font-weight: 400; font-size: 1em; line-height: 1.1em; color: #6
 ul.targets					{ padding: 0; list-style: none; font-size: 1.1em; margin-top: .45em; }
 ul.targets > li				{ list-style: none; cursor: pointer; }
 ul.targets > li + li		{ margin-top: .5em; }
-ul.targets > li > a			{ display: block; padding: .5em .6em; background: #3e639b; border-radius: 5px; box-shadow: 0 1px 3px #bbb; color: #fff; }
+ul.targets > li > a			{ display: block; padding: .5em .6em; background: #3e639b; border-radius: 5px; box-shadow: 0 1px 1px #777; color: #fff; }
 ul.targets > li > a:hover	{ background: #000; }
 ul.targets > li > a label		{ display: block; line-height: 1.1em; color: #fff; cursor: pointer; }
 ul.targets > li > a div.sub		{ font-size: .8em; color: rgba(255, 255, 255, 0.4); line-height: 1.2em; margin-top: 3px; }
