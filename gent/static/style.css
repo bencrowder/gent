@@ -164,7 +164,7 @@ h2 + ul.tags				{ margin-top: .5em; }
 .family-display span		{ color: rgba(255, 255, 255, 0.4); }
 .family-display .delete		{ float: right; margin-left: .5em; color: rgba(255, 255, 255, 0.5); }
 
-.autocomplete-suggestions	{ background: #fff; border: solid 1px #bbb; box-shadow: 0 1px 1px #bebebe; }
+.autocomplete-suggestions	{ background: #fff; border: solid 1px #bbb; box-shadow: 0 1px 1px #bebebe; max-height: 200px !important; overflow-y: scroll; }
 .autocomplete-suggestion	{ border-top: solid 1px #bbb; padding: .3em .5em .4em; cursor: pointer; }
 .autocomplete-suggestion span.desc	{ display: block; font-size: .7em; color: rgba(0, 0, 0, 0.4); }
 .autocomplete-suggestion.autocomplete-selected	{ background: #111; color: #fff; }
