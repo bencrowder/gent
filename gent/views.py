@@ -57,25 +57,31 @@ def search(request):
 
             item_list = Item.objects.filter(tags__name=tag).order_by('title')
         else:
-            # Get families that match
-            family_list = Family.objects.filter(
-                Q(husband_name__icontains=query)
-                | Q(husband_id__icontains=query)
-                | Q(wife_name__icontains=query)
-                | Q(wife_id__icontains=query)
-                | Q(notes__icontains=query)
-            ).distinct().order_by('husband_name', 'wife_name')
+            if query == '*':
+                # Get everything
+                family_list = Family.objects.all().order_by('husband_name', 'wife_name')
+                item_list = Item.objects.all().order_by('order')
+                tag_list = Tag.objects.all().order_by('name')
+            else:
+                # Get families that match
+                family_list = Family.objects.filter(
+                    Q(husband_name__icontains=query)
+                    | Q(husband_id__icontains=query)
+                    | Q(wife_name__icontains=query)
+                    | Q(wife_id__icontains=query)
+                    | Q(notes__icontains=query)
+                ).distinct().order_by('husband_name', 'wife_name')
 
-            # Get items that match
-            item_list = Item.objects.filter(
-                Q(title__icontains=query)
-                | Q(notes__icontains=query)
-            ).distinct().order_by('order')
+                # Get items that match
+                item_list = Item.objects.filter(
+                    Q(title__icontains=query)
+                    | Q(notes__icontains=query)
+                ).distinct().order_by('order')
 
-            # Get tags that match
-            tag_list = Tag.objects.filter(
-                Q(name__icontains=query)
-            ).distinct().order_by('name')
+                # Get tags that match
+                tag_list = Tag.objects.filter(
+                    Q(name__icontains=query)
+                ).distinct().order_by('name')
 
     return render(request, 'search.html', {'user': request.user, 'title': '{} - Gent'.format(query.encode('utf-8')), 'families': family_list, 'items': item_list, 'tags': tag_list, 'query': query})
 
