@@ -322,7 +322,7 @@ def ws_family_search(request):
             subtitle = ''
 
         suggestion = {
-            'value': family.html(),
+            'value': unicode(family),
             'data': {
                 'id': family.id,
                 'subtitle': subtitle,

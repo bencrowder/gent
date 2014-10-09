@@ -322,7 +322,7 @@ $(document).ready(function() {
 	var options = {
 		serviceUrl: '/ws/family/search/',
 		formatResult: function(suggestion, currentValue) {
-			var html = '<div id="' + suggestion.data.id + '"><label>' + suggestion.value + '</label>';
+			var html = '<div id="' + suggestion.data.id + '"><label>' + suggestion.value.replace('/', '<span>/</span>') + '</label>';
 			if (suggestion.data.subtitle) {
 				html += '<span class="desc">' + suggestion.data.subtitle + '</span>';
 			}
@@ -342,7 +342,7 @@ $(document).ready(function() {
 			familyBox.siblings("input[name=family]").val(suggestion.data.id);
 
 			// Update the family display box
-			familyBox.siblings("div.family-display").find("div").html(suggestion.value);
+			familyBox.siblings("div.family-display").find("div").html(suggestion.value.replace('/', '<span>/</span>'));
 
 			// Show the family display box
 			familyBox.siblings("div.family-display").show();
