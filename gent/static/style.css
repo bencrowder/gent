@@ -170,10 +170,10 @@ a:hover {
 /* Item page */
 
 #item-header {
-	border-left: solid 3.1em #ddd;
+	border-left: solid 3.1em #b2e5ff;
 	border-radius: 3px;
 	border: solid 1px #ddd;
-	box-shadow: 0 1px 5px #ddd;
+	box-shadow: 0 0 5px #ddd;
 	cursor: pointer;
 	min-height: 3em;
 	padding: .6em;
@@ -181,8 +181,8 @@ a:hover {
 
 #item-header .checkbox {
 	border-radius: 3px;
-	border: solid 1px #818181;
-	box-shadow: 1px 1px 5px #c0c0c0 inset;
+	border: solid 1px #8fb9db;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2) inset;
 	float: left;
 	height: 1.5em;
 	margin-left: -2.9em;
@@ -190,8 +190,8 @@ a:hover {
 }
 
 #item-header.completed .checkbox {
-	background: #444;
-	border-color: #444;
+	background: #284c7b;
+	border-color: #284c7b;
 	box-shadow: none;
 }
 
