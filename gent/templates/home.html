@@ -34,7 +34,7 @@
 		<li class="container">
 			<a href="{% url "family" family.id %}">
 				<label>{{ family.html|safe }}</label>
-				<div class="sub">{{ family.incomplete_items_label }}, {{ family.incomplete_items.0.date_created|date:"j M Y" }}</div>
+				<div class="sub">{{ family.incomplete_items_label }}{% if family.incomplete_items|length %}, {{ family.incomplete_items.0.date_created|date:"j M Y" }}{% endif %}</div>
 			</a>
 		</li>
 		{% endfor %}
