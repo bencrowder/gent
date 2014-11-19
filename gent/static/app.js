@@ -66,10 +66,26 @@ $(document).ready(function() {
 		return false;
 	}
 
+	// Shift+return to add/save
 	Mousetrap.bindGlobal('shift+return', function(e) {
+		// Add item
 		if ($("form#add-modal:visible").length) {
 			// Submit add modal
 			$("form#add-modal").submit();
+			return false;
+		}
+
+		// Edit item
+		if ($("form#edit-item-modal:visible").length) {
+			// Submit item edit modal
+			$("form#edit-item-modal").submit();
+			return false;
+		}
+
+		// Edit family
+		if ($("form#edit-family-modal:visible").length) {
+			// Submit family edit modal
+			$("form#edit-family-modal").submit();
 			return false;
 		}
 	});
