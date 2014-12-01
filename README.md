@@ -2,6 +2,18 @@
 
 A simple genealogy todo item app.
 
+### Installation
+
+These installation instructions assume some basic knowledge of Django.
+
+- Clone the repo
+- Create a virtualenv for the project if you want
+- Copy `settings_sample.py` to `settings.py` and edit to taste (and make sure you put something in `SECRET_KEY`)
+- `pip install -r requirements.txt`
+- `./manage.py migrate`
+- `./manage.py createsuperuser`
+- `./manage.py runserver 8001`
+
 ### Usage
 
 Items are attached to families, which have a husband and/or a wife.
@@ -31,13 +43,3 @@ To see everything in the system, search for `*`.
 - `h` to return to the home page
 
 
-### Installation
-
-These installation instructions assume some basic knowledge of Django.
-
-- Clone the repo
-- Create a virtualenv for the project if you want
-- Copy `settings_sample.py` to `settings.py` and edit to taste
-- `pip install -r requirements.txt`
-- `./manage.py migrate`
-- `./manage.py runserver 8001`
