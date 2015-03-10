@@ -1,4 +1,4 @@
 *.pyc
 data.db
-gent/settings.py
+local_settings.py
 gent/static/admin
