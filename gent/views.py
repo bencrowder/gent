@@ -168,9 +168,9 @@ def ws_item(request):
         # Load tags
         tag_list = req.get('tags', '')
         tags = []
-        for tag in tag_list.split(', '):
-            if tag != '':
-                obj, created = Tag.objects.get_or_create(name=tag)
+        for tag in tag_list.split(','):
+            if tag.strip() != '':
+                obj, created = Tag.objects.get_or_create(name=tag.strip())
                 tags.append(obj)
 
         # If new family

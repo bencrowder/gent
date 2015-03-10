@@ -408,6 +408,11 @@ $(document).ready(function() {
 		$("input#q").focus();
 		return false;
 	});
+
+
+	// Tags
+	$("input[name=tags]").tagit({
+	});
 });
 
 

@@ -352,6 +352,47 @@ form.modal input[name=tags] {
 	font-size: 1em;
 }
 
+form.modal ul.tagit {
+	border-color: #bbb;
+	border-radius: 3px;
+	font-size: 1em;
+	margin-top: 0;
+	padding: 4px 5px;
+}
+
+form.modal ul.tagit li.tagit-choice .tagit-label:not(a) {
+	color: #222;
+}
+
+form.modal ul.tagit li.tagit-choice {
+	background-color: #d4efbc;
+	border-color: #d4efbc;
+	border-radius: 3px;
+}
+
+form.modal ul.tagit li.tagit-choice-editable {
+	font-size: .9em;
+	padding: 2px 20px 3px 6px;
+}
+
+form.modal ul.tagit li.tagit-choice .tagit-close {
+	margin-top: -9px;
+}
+
+form.modal ul.tagit li.tagit-choice .tagit-close .text-icon {
+	font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+	color: #9ec78b;
+}
+
+form.modal ul.tagit input[type=text] {
+	font-size: .9em;
+	width: 100px;
+}
+
+form.modal ul.tagit li.tagit-new {
+	margin-top: 0;
+}
+
 
 /* Notes */
 
