@@ -514,7 +514,7 @@ ul.families > li > a label span {
 }
 
 ul.families > li > a div.sub {
-	color: #bbb;
+	color: #999;
 	font-size: .8em;
 	line-height: 1.2em;
 	margin-top: 2px;
@@ -563,7 +563,7 @@ ul.items > li label {
 }
 
 ul.items > li div.sub {
-	color: #bbb;
+	color: #999;
 	font-size: .8em;
 	line-height: 1.2em;
 	margin-top: 2px;

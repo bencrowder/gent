@@ -95,7 +95,7 @@ def family(request, family_id):
             return render(request, 'family.html', {'user': request.user, 'title': '{} - Gent'.format(family),'family': family})
         else:
             return render(request, '404.html', {'user': request.user, 'title': '404 - Gent'})
-    except e:
+    except Exception as e:
         print e
         return render(request, '500.html', {'user': request.user, 'title': '500 - Gent'})
 
