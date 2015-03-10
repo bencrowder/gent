@@ -307,6 +307,7 @@ form.modal textarea {
 	border: solid 1px #bbb;
 	font-size: 1em;
 	margin: 0;
+	max-height: 180px;
 	padding: 3px 4px;
 	width: 100%;
 }

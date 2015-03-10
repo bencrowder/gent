@@ -411,8 +411,11 @@ $(document).ready(function() {
 
 
 	// Tags
-	$("input[name=tags]").tagit({
-	});
+	$("input[name=tags]").tagit();
+
+
+	// Autosize
+	$("textarea[name=notes]").autosize();
 });
 
 
