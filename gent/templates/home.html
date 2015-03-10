@@ -13,20 +13,8 @@
 </section>
 {% endif %}
 
-{% if tags %}
-<section class="home">
-	<h2 class="container">Top Tags</h2>
-
-	<ul class="tags container">
-		{% for tag in tags %}
-		<li><a href="/search/?q=tag:{{ tag }}">#{{ tag }}</a></li>
-		{% endfor %}
-	</ul>
-</section>
-{% endif %}
-
 {% if recent_families %}
-<section class="home">
+<section class="home split">
 	<h2 class="container">Recent Families</h2>
 
 	<ul class="families">
@@ -43,7 +31,7 @@
 {% endif %}
 
 {% if recent_items %}
-<section class="home">
+<section class="home split">
 	<h2 class="container">Recent Items</h2>
 
 	<ul class="items">
@@ -60,7 +48,7 @@
 {% endif %}
 
 {% if top_families %}
-<section class="home">
+<section class="home split">
 	<h2 class="container">Top Families</h2>
 
 	<ul class="families">
@@ -71,6 +59,18 @@
 				<div class="sub">{{ family.incomplete_items_label }}</div>
 			</a>
 		</li>
+		{% endfor %}
+	</ul>
+</section>
+{% endif %}
+
+{% if tags %}
+<section class="home split">
+	<h2 class="container">Top Tags</h2>
+
+	<ul class="tags container">
+		{% for tag in tags %}
+		<li><a href="/search/?q=tag:{{ tag }}">#{{ tag }}</a></li>
 		{% endfor %}
 	</ul>
 </section>

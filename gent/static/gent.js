@@ -416,6 +416,7 @@ $(document).ready(function() {
 
 	// Autosize
 	$("textarea[name=notes]").autosize();
+	$("form.modal textarea[name=title]").autosize();
 });
 
 

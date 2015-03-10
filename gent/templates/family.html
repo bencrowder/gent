@@ -11,20 +11,24 @@
 </div>
 
 {% if family.incomplete_items|length %}
-<ul class="items sortable">
-	{% for item in family.incomplete_items %}
-	<li class="container" data-id="{{ item.id }}">
-		<a href="{% url "item" item.id %}">
-			<label>{{ item.title }}</label>
-			{% if item.notes %}<div id="notes" class="sub">Has notes</div>{% endif %}
-		</a>
-	</li>
-	{% endfor %}
-</ul>
+<section class="split">
+	<h2 class="container">Items</h2>
+
+	<ul class="items sortable">
+		{% for item in family.incomplete_items %}
+		<li class="container" data-id="{{ item.id }}">
+			<a href="{% url "item" item.id %}">
+				<label>{{ item.title }}</label>
+				{% if item.notes %}<div id="notes" class="sub">Has notes</div>{% endif %}
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+</section>
 {% endif %}
 
 {% if family.notes %}
-<section id="notes">
+<section id="notes" class="split">
 	<h2 class="container">Notes</h2>
 
 	<div class="content container">

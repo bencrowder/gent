@@ -29,24 +29,27 @@
 <body>
 	<div id="home">
 		<div class="container">
-			<a id="home-link" href="/">Home</a>
+			<a id="home-link" href="/">Gent</a>
 			{% if user.is_authenticated %}
-			<a id="add-item" href="">Add</a>
 			<a id="logout-link" href="{% url 'logout' %}">Logout</a>
 			{% endif %}
         </div>
     </div>
 
 	{% block search %}
+	{% if user.is_authenticated %}
 	<div id="search">
 		<div class="container">
 			<form action="{% url 'search' %}" method="get">
+				<a id="add-item" href="">+</a>
+
 				<input type="text" id="q" name="q" autocapitalize="off" autocorrect="off" {% if query %}value="{{ query }}"{% endif %}/>
 
-				<button type="submit" value="Search">Search</button>
+				<button type="submit" value="Search"><object type="image/svg+xml" data="{% static 'search.svg' %}">Search</object></button>
 			</form>
 		</div>
 	</div>
+	{% endif %}
 	{% endblock search %}
 
 	<div id="body">
@@ -63,7 +66,7 @@
 
 		<label>Family</label>
 		<input type="hidden" name="family" value="{{ item.family.id }}" />
-		<div class="family-display hidden"><a href="" class="delete">x</a><div></div></div>
+		<div class="family-display hidden"><a href="" class="delete">×</a><div></div></div>
 		<input type="text" id="add-family" name="family-box" class="family-box" />
 
 		<label>Notes</label>
