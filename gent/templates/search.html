@@ -9,7 +9,7 @@
 
 {% if families|length %}
 <section class="results split">
-	<h2 class="container">Matching Families</h2>
+	<h2 class="container">{{ families|length }} Matching Famil{% if families|length == 1 %}y{% else %}ies{% endif %}</h2>
 
 	<ul class="families">
 		{% for family in families %}
@@ -26,7 +26,7 @@
 
 {% if items|length %}
 <section class="results split">
-	<h2 class="container">Matching Items</h2>
+	<h2 class="container">{{ items|length }} Matching Item{% if items|length != 1 %}s{% endif %}</h2>
 
 	<ul class="items">
 		{% for item in items %}
@@ -43,7 +43,7 @@
 
 {% if tags|length %}
 <section class="results split">
-	<h2 class="container">Matching Tags</h2>
+	<h2 class="container">{{ tags|length }} Matching Tag{% if tags|length != 1 %}s{% endif %}</h2>
 
 	<ul class="tags container">
 		{% for tag in tags %}
