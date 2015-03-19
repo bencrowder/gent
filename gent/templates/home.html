@@ -13,6 +13,38 @@
 </section>
 {% endif %}
 
+{% if starred_items or starred_families %}
+<section class="home split">
+	<h2 class="container">&#x2605; Starred</h2>
+
+	{% if starred_items %}
+	<ul class="items">
+		{% for item in starred_items %}
+		<li class="container">
+			<a href="{% url "item" item.id %}">
+				<label>{{ item.title }}</label>
+				<div class="sub">{{ item.family.html|safe }}</div>
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+
+	{% if starred_families %}
+	<ul class="families">
+		{% for family in starred_families %}
+		<li class="container">
+			<a href="/family/{{ family.id }}/">
+				<label>{{ family.html|safe }}</label>
+				<div class="sub">{{ family.incomplete_items_label }}</div>
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+</section>
+{% endif %}
+
 {% if recent_families %}
 <section class="home split">
 	<h2 class="container">Recent Families</h2>
@@ -22,7 +54,7 @@
 		<li class="container">
 			<a href="{% url "family" family.id %}">
 				<label>{{ family.html|safe }}</label>
-				<div class="sub">{{ family.incomplete_items_label }}{% if family.incomplete_items|length %}, {{ family.incomplete_items.0.date_created|date:"j M Y" }}{% endif %}</div>
+				<div class="sub">{{ family.incomplete_items_label }}{% if family.latest_incomplete_items|length %} — {{ family.latest_incomplete_items.0.date_created|date:"F j, Y" }}{% endif %}</div>
 			</a>
 		</li>
 		{% endfor %}
@@ -40,23 +72,6 @@
 			<a href="{% url "item" item.id %}">
 				<label>{{ item.title }}</label>
 				<div class="sub">{{ item.family.html|safe }}</div>
-			</a>
-		</li>
-		{% endfor %}
-	</ul>
-</section>
-{% endif %}
-
-{% if top_families %}
-<section class="home split">
-	<h2 class="container">Top Families</h2>
-
-	<ul class="families">
-		{% for family in top_families %}
-		<li class="container">
-			<a href="/family/{{ family.id }}/">
-				<label>{{ family.html|safe }}</label>
-				<div class="sub">{{ family.incomplete_items_label }}</div>
 			</a>
 		</li>
 		{% endfor %}

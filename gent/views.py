@@ -9,25 +9,25 @@ import datetime
 
 @login_required()
 def home(request):
-    # Get list of tags
-    tags = Tag.objects.filter(owner=request.user).annotate(num_items=Count('items')).order_by('-num_items', 'name')[:10]
+    # Get list of starred families/items
+    starred_families = Family.objects.filter(owner=request.user, starred=True).annotate(num_items=Count('items')).order_by('-num_items')
+    starred_items = Item.objects.filter(owner=request.user, starred=True).order_by('-date_created')
 
     # Get list of recent families (families with most recent items)
     # Go through extra stuff to make it unique
-    items = Item.objects.filter(owner=request.user).order_by('-date_created')[:30]
+    items = Item.objects.filter(owner=request.user).order_by('-date_created')[:50]
     families = set()
     families_add = families.add
     recent_families = [i.family for i in items if not (i.family in families or families_add(i.family))]
-    recent_families = recent_families[:3]
+    recent_families = recent_families[:7]
 
     # Get list of recent items
     recent_items = Item.objects.filter(owner=request.user, completed=False).order_by('-date_created')[:3]
 
-    # Get list of families with most todos
-    # TODO: use # incomplete items instead
-    top_families = Family.objects.filter(owner=request.user).annotate(num_items=Count('items')).order_by('-num_items')[:3]
+    # Get list of tags
+    tags = Tag.objects.filter(owner=request.user).annotate(num_items=Count('items')).order_by('-num_items', 'name')[:10]
 
-    return render(request, 'home.html', {'user': request.user, 'title': 'Gent', 'tags': tags, 'recent_families': recent_families, 'recent_items': recent_items, 'top_families': top_families})
+    return render(request, 'home.html', {'user': request.user, 'title': 'Gent', 'tags': tags, 'recent_families': recent_families, 'recent_items': recent_items, 'starred_families': starred_families, 'starred_items': starred_items})
 
 @login_required()
 def search(request):

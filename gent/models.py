@@ -33,6 +33,10 @@ class Family(models.Model):
     def incomplete_items(self):
         return self.items.filter(completed=False).order_by('order')
 
+    # Return latest incomplete items
+    def latest_incomplete_items(self):
+        return self.items.filter(completed=False).order_by('-date_created')
+
     # Return incomplete items label
     def incomplete_items_label(self):
         num_items = len(self.incomplete_items())
