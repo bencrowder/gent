@@ -186,7 +186,7 @@ def ws_item(request):
 
                 family = Family(**args)
                 family.save()
-            except e:
+            except Exception as e:
                 print e
 
     if item_id:
@@ -210,6 +210,7 @@ def ws_item(request):
                 response = { 'status': 500, 'message': "Couldn't create new item" }
 
     elif request.method == 'PUT':
+        print "here"
         # Update item
         if title == '' or (family_id == '' and family is None):
             response = { 'status': 501, 'message': "Missing title or family" }
@@ -236,14 +237,14 @@ def ws_item(request):
                 item.save()
 
                 response = { 'status': 200 }
-            except e:
+            except Exception as e:
                 response = { 'status': 500, 'message': "Couldn't update item" }
 
     elif request.method == 'DELETE':
         try:
             item.delete()
             response = { 'status': 200 }
-        except e:
+        except Exception as e:
             response = { 'status': 500, 'message': "Couldn't delete item" }
 
     return JsonResponse(response)

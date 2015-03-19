@@ -42,13 +42,13 @@
 {% if item.date_completed %}
 <section id="completed-container">
 	<h2 class="container">Completed</h2>
-	<div class="content container" id="date-completed" data-date="{{ item.date_completed|date:"Y-m-d" }}">{{ item.date_completed|date:"j M Y" }}</div>
+	<div class="content container" id="date-completed" data-date="{{ item.date_completed|date:"Y-m-d" }}">{{ item.date_completed|date:"F j, Y" }}</div>
 </section>
 {% endif %}
 
 <section>
 	<h2 class="container">Created</h2>
-	<div class="content container" id="date-created" data-date="{{ item.date_created|date:"Y-m-d" }}">{{ item.date_created|date:"j M Y" }}</div>
+	<div class="content container" id="date-created" data-date="{{ item.date_created|date:"Y-m-d" }}">{{ item.date_created|date:"F j, Y" }}</div>
 </section>
 
 
@@ -77,13 +77,10 @@
 	<label>Tags</label>
 	<input type="text" id="edit-tags" name="tags" value="{{ item.tags.all|join:", " }}"/>
 
-	<label>Date Created</label>
-	<input type="date" id="edit-date-created" name="datecreated" value="{{ item.date_created|date:"Y-m-d" }}"/>
-
-	<label>Date Completed</label>
-	<input type="date" id="edit-date-completed" name="datecompleted" value="{{ item.date_completed|date:"Y-m-d" }}"/>
-
 	<input type="submit" value="Save Changes" />
+
+	<input type="hidden" id="edit-date-created" name="datecreated" value="{{ item.date_created|date:"Y-m-d" }}"/>
+	<input type="hidden" id="edit-date-completed" name="datecompleted" value="{{ item.date_completed|date:"Y-m-d" }}"/>
 </form>
 
 <form id="delete-item-modal" class="modal" data-id="{{ item.id }}">
