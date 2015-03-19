@@ -50,7 +50,7 @@ class Family(models.Model):
 
 class Item(models.Model):
     title = models.CharField(max_length=500)
-    family = models.ForeignKey(Family, related_name='items')
+    family = models.ForeignKey(Family, related_name='items', blank=True, null=True)
 
     completed = models.BooleanField(default=False)
     date_completed = models.DateTimeField(blank=True, null=True)
