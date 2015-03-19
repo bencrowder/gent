@@ -73,7 +73,7 @@
 {% block modals %}
 <form id="edit-family-modal" class="modal" data-id="{{ family.id }}">
 	<a class="cancel-link">Cancel</a>
-	<h2>Edit Family</h2>
+	<h2>Edit Family <span class="star {% if family.starred %}starred{% endif %}"></span></h2>
 
 	<label>Husband Name</label>
 	<input type="text" id="edit-husband-name" name="husband-name" value="{{ family.husband_name }}" />
@@ -96,6 +96,7 @@
 	<input type="submit" value="Save Changes" />
 
 	<input type="hidden" id="edit-date-created" name="datecreated" value="{{ family.date_created|date:"Y-m-d" }}" />
+	<input type="hidden" id="starred" name="starred" value="{{ family.starred }}" />
 </form>
 
 <form id="delete-family-modal" class="modal" data-id="{{ family.id }}">

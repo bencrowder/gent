@@ -62,7 +62,7 @@
 {% block modals %}
 <form id="edit-item-modal" class="modal" data-id="{{ item.id }}">
 	<a class="cancel-link">Cancel</a>
-	<h2>Edit Item</h2>
+	<h2>Edit Item <span class="star {% if item.starred %}starred{% endif %}"></span></h2>
 
 	<textarea type="text" id="edit-title" name="title">{{ item.title }}</textarea>
 
@@ -81,6 +81,7 @@
 
 	<input type="hidden" id="edit-date-created" name="datecreated" value="{{ item.date_created|date:"Y-m-d" }}"/>
 	<input type="hidden" id="edit-date-completed" name="datecompleted" value="{{ item.date_completed|date:"Y-m-d" }}"/>
+	<input type="hidden" id="starred" name="starred" value="{{ item.starred|lower }}" />
 </form>
 
 <form id="delete-item-modal" class="modal" data-id="{{ item.id }}">

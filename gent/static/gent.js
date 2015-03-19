@@ -161,6 +161,8 @@ $(document).ready(function() {
 		var tags = $(this).find("input[name=tags]").val().trim();
 		var dateCreated = $(this).find("input[name=datecreated]").val();
 		var dateCompleted = $(this).find("input[name=datecompleted]").val();
+		var starred = $(this).find("input[name=starred]").val();
+		console.log(starred);
 
 		if (title != '') {
 			url += "?item_id=" + itemId;
@@ -176,6 +178,7 @@ $(document).ready(function() {
 					notes: notes,
 					datecreated: dateCreated,
 					datecompleted: dateCompleted,
+					starred: starred,
 				},
 				success: function(data) {
 					// Close modal
@@ -254,6 +257,7 @@ $(document).ready(function() {
 		var notes = $(this).find("textarea[name=notes]").val().trim();
 		var tags = $(this).find("input[name=tags]").val().trim();
 		var dateCreated = $(this).find("input[name=datecreated]").val();
+		var starred = $(this).find("input[name=starred]").val();
 
 		if (husbandName != '' || wifeName != '') {
 			url += "?family_id=" + familyId;
@@ -269,6 +273,7 @@ $(document).ready(function() {
 					tags: tags,
 					notes: notes,
 					datecreated: dateCreated,
+					starred: starred,
 				},
 				success: function(data) {
 					// Close modal
@@ -417,6 +422,22 @@ $(document).ready(function() {
 	// Autosize
 	$("textarea[name=notes]").autosize();
 	$("form.modal textarea[name=title]").autosize();
+
+
+	// Starring items/families
+	$("h2 .star").on("click", function() {
+		var starredData = $(this).parents("h2:first").siblings("input[name=starred]");
+
+		if ($(this).hasClass("starred")) {
+			starredData.val(false);
+			$(this).removeClass("starred");
+		} else {
+			starredData.val(true);
+			$(this).addClass("starred");
+		}
+
+		return false;
+	});
 });
 
 

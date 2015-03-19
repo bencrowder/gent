@@ -293,6 +293,30 @@ form.modal h2 {
 	margin: 0;
 }
 
+form.modal h2 .star {
+	cursor: pointer;
+	margin-left: 3px;
+}
+
+form.modal h2 .star:before {
+	color: #ddd;
+	content: "\2606";
+}
+
+form.modal h2 .star:hover:before {
+	color: #777;
+	content: "\2605";
+}
+
+form.modal h2 .star.starred:before {
+	color: #111;
+	content: "\2605";
+}
+
+form.modal h2 .star.starred:hover:before {
+	color: #777;
+}
+
 form.modal label {
 	color: #6993b4;
 	display: block;

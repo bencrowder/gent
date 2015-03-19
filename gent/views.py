@@ -167,6 +167,12 @@ def ws_item(request):
         datecreated = req.get('datecreated', '')
         datecompleted = req.get('datecompleted', '')
         notes = req.get('notes', '')
+        starred = req.get('starred', '')
+
+        if starred == "true":
+            starred = True
+        else:
+            starred = False
 
         # Load tags
         tag_list = req.get('tags', '')
@@ -205,7 +211,8 @@ def ws_item(request):
             try:
                 if family is None:
                     family = Family.objects.get(id=family_id)
-                item = Item(title=title, family=family, notes=notes, owner=request.user)
+
+                item = Item(title=title, family=family, notes=notes, owner=request.user, starred=starred)
                 item.save()
                 item.tags = tags
                 item.save()
@@ -226,6 +233,7 @@ def ws_item(request):
                 item.title = title
                 item.family = family
                 item.notes = notes
+                item.starred = starred
 
                 item.tags.clear()
                 for tag in tags:
@@ -269,6 +277,12 @@ def ws_family(request):
         datecreated = req.get('datecreated', '')
         datecompleted = req.get('datecompleted', '')
         notes = req.get('notes', '')
+        starred = req.get('starred', '')
+
+        if starred == "true":
+            starred = True
+        else:
+            starred = False
 
         # Load tags
         tag_list = req.get('tags', '')
@@ -292,6 +306,7 @@ def ws_family(request):
                 family.wife_name = wife_name
                 family.wife_id = wife_id
                 family.notes = notes
+                family.starred = starred
 
                 family.tags.clear()
                 for tag in tags:
