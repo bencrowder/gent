@@ -2,13 +2,11 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-from django.conf import settings
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
@@ -22,7 +20,6 @@ class Migration(migrations.Migration):
                 ('wife_id', models.CharField(max_length=50, verbose_name=b'Wife: FamilyTree ID', blank=True)),
                 ('notes', models.TextField(blank=True)),
                 ('date_created', models.DateTimeField(auto_now_add=True)),
-                ('owner', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name_plural': 'families',
@@ -40,7 +37,6 @@ class Migration(migrations.Migration):
                 ('order', models.IntegerField(default=0)),
                 ('notes', models.TextField(blank=True)),
                 ('family', models.ForeignKey(related_name=b'items', to='gent.Family')),
-                ('owner', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={
             },
