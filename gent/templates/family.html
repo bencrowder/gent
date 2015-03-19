@@ -93,10 +93,9 @@
 	<label>Tags</label>
 	<input type="text" id="edit-tags" name="tags" value="{{ family.tags.all|join:", " }}" />
 
-	<label>Date Created</label>
-	<input type="date" id="edit-date-created" name="datecreated" value="{{ family.date_created|date:"Y-m-d" }}" />
-
 	<input type="submit" value="Save Changes" />
+
+	<input type="hidden" id="edit-date-created" name="datecreated" value="{{ family.date_created|date:"Y-m-d" }}" />
 </form>
 
 <form id="delete-family-modal" class="modal" data-id="{{ family.id }}">

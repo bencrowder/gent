@@ -1,7 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Tag(models.Model):
     name = models.CharField(max_length=250)
+    owner = models.ForeignKey(User)
 
     def __unicode__(self):
         return self.name
@@ -15,6 +17,7 @@ class Family(models.Model):
     notes = models.TextField(blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     tags = models.ManyToManyField(Tag, related_name='families', blank=True, null=True)
+    owner = models.ForeignKey(User)
 
     class Meta:
         verbose_name_plural = "families"
@@ -51,6 +54,7 @@ class Item(models.Model):
     tags = models.ManyToManyField(Tag, related_name='items', blank=True, null=True)
     order = models.IntegerField(default=0)
     notes = models.TextField(blank=True)
+    owner = models.ForeignKey(User)
 
     def __unicode__(self):
         return self.title

@@ -10,22 +10,22 @@ import datetime
 @login_required()
 def home(request):
     # Get list of tags
-    tags = Tag.objects.all().annotate(num_items=Count('items')).order_by('-num_items', 'name')[:10]
+    tags = Tag.objects.filter(owner=request.user).annotate(num_items=Count('items')).order_by('-num_items', 'name')[:10]
 
     # Get list of recent families (families with most recent items)
     # Go through extra stuff to make it unique
-    items = Item.objects.all().order_by('-date_created')[:30]
+    items = Item.objects.filter(owner=request.user).order_by('-date_created')[:30]
     families = set()
     families_add = families.add
     recent_families = [i.family for i in items if not (i.family in families or families_add(i.family))]
     recent_families = recent_families[:3]
 
     # Get list of recent items
-    recent_items = Item.objects.filter(completed=False).order_by('-date_created')[:3]
+    recent_items = Item.objects.filter(owner=request.user, completed=False).order_by('-date_created')[:3]
 
     # Get list of families with most todos
     # TODO: use # incomplete items instead
-    top_families = Family.objects.all().annotate(num_items=Count('items')).order_by('-num_items')[:3]
+    top_families = Family.objects.filter(owner=request.user).annotate(num_items=Count('items')).order_by('-num_items')[:3]
 
     return render(request, 'home.html', {'user': request.user, 'title': 'Gent', 'tags': tags, 'recent_families': recent_families, 'recent_items': recent_items, 'top_families': top_families})
 
@@ -53,18 +53,19 @@ def search(request):
             tag = query[1:]
 
         if tag_search:
-            family_list = Family.objects.filter(tags__name=tag).distinct().order_by('husband_name', 'wife_name')
+            family_list = Family.objects.filter(owner=request.user, tags__name=tag).distinct().order_by('husband_name', 'wife_name')
 
-            item_list = Item.objects.filter(tags__name=tag).order_by('title')
+            item_list = Item.objects.filter(owner=request.user, tags__name=tag).order_by('title')
         else:
             if query == '*':
                 # Get everything
-                family_list = Family.objects.all().order_by('husband_name', 'wife_name')
-                item_list = Item.objects.all().order_by('order')
-                tag_list = Tag.objects.all().order_by('name')
+                family_list = Family.objects.filter(owner=request.user).order_by('husband_name', 'wife_name')
+                item_list = Item.objects.filter(owner=request.user).order_by('order')
+                tag_list = Tag.objects.filter(owner=request.user).order_by('name')
             else:
                 # Get families that match
                 family_list = Family.objects.filter(
+                    Q(owner=request.user),
                     Q(husband_name__icontains=query)
                     | Q(husband_id__icontains=query)
                     | Q(wife_name__icontains=query)
@@ -74,12 +75,14 @@ def search(request):
 
                 # Get items that match
                 item_list = Item.objects.filter(
+                    Q(owner=request.user),
                     Q(title__icontains=query)
                     | Q(notes__icontains=query)
                 ).distinct().order_by('order')
 
                 # Get tags that match
                 tag_list = Tag.objects.filter(
+                    Q(owner=request.user),
                     Q(name__icontains=query)
                 ).distinct().order_by('name')
 
@@ -89,7 +92,7 @@ def search(request):
 def family(request, family_id):
     # Get family
     try:
-        family = Family.objects.get(id=family_id)
+        family = Family.objects.get(id=family_id, owner=request.user)
 
         if family:
             return render(request, 'family.html', {'user': request.user, 'title': '{} - Gent'.format(family),'family': family})
@@ -103,7 +106,7 @@ def family(request, family_id):
 def item(request, item_id):
     # Get item 
     try:
-        item = Item.objects.get(id=item_id)
+        item = Item.objects.get(id=item_id, owner=request.user)
 
         if item:
             return render(request, 'item.html', {'user': request.user, 'title': '{} - Gent'.format(item),'item': item})
@@ -170,7 +173,7 @@ def ws_item(request):
         tags = []
         for tag in tag_list.split(','):
             if tag.strip() != '':
-                obj, created = Tag.objects.get_or_create(name=tag.strip())
+                obj, created = Tag.objects.get_or_create(name=tag.strip(), owner=request.user)
                 tags.append(obj)
 
         # If new family
@@ -183,6 +186,8 @@ def ws_item(request):
 
                 if wife.strip() != '':
                     args['wife_name'] = wife.strip()
+
+                args['owner'] = request.user
 
                 family = Family(**args)
                 family.save()
@@ -200,7 +205,7 @@ def ws_item(request):
             try:
                 if family is None:
                     family = Family.objects.get(id=family_id)
-                item = Item(title=title, family=family, notes=notes)
+                item = Item(title=title, family=family, notes=notes, owner=request.user)
                 item.save()
                 item.tags = tags
                 item.save()
@@ -210,7 +215,6 @@ def ws_item(request):
                 response = { 'status': 500, 'message': "Couldn't create new item" }
 
     elif request.method == 'PUT':
-        print "here"
         # Update item
         if title == '' or (family_id == '' and family is None):
             response = { 'status': 501, 'message': "Missing title or family" }
@@ -269,9 +273,9 @@ def ws_family(request):
         # Load tags
         tag_list = req.get('tags', '')
         tags = []
-        for tag in tag_list.split(', '):
+        for tag in tag_list.split(','):
             if tag != '':
-                obj, created = Tag.objects.get_or_create(name=tag)
+                obj, created = Tag.objects.get_or_create(name=tag, owner=request.user)
                 tags.append(obj)
 
     if family_id:
@@ -316,6 +320,7 @@ def ws_family_search(request):
 
     # Search for family by husband/wife name/id
     families = Family.objects.filter(
+                Q(owner=request.user),
                 Q(husband_name__icontains=query)
                 | Q(husband_id__icontains=query)
                 | Q(wife_name__icontains=query)
