@@ -18,6 +18,7 @@ class Family(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     tags = models.ManyToManyField(Tag, related_name='families', blank=True, null=True)
     owner = models.ForeignKey(User)
+    starred = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = "families"
@@ -55,6 +56,7 @@ class Item(models.Model):
     order = models.IntegerField(default=0)
     notes = models.TextField(blank=True)
     owner = models.ForeignKey(User)
+    starred = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.title
