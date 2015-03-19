@@ -109,7 +109,7 @@ $(document).ready(function() {
 		var notes = $("textarea[name=notes]").val().trim();
 		var tags = $("input[name=tags]").val().trim();
 
-		if (title != '' && (family != '' || familyBox != '')) {
+		if (title != '') {
 			$.ajax({
 				url: url,
 				method: "POST",
@@ -162,7 +162,6 @@ $(document).ready(function() {
 		var dateCreated = $(this).find("input[name=datecreated]").val();
 		var dateCompleted = $(this).find("input[name=datecompleted]").val();
 		var starred = $(this).find("input[name=starred]").val();
-		console.log(starred);
 
 		if (title != '') {
 			url += "?item_id=" + itemId;
