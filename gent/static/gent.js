@@ -126,7 +126,12 @@ $(document).ready(function() {
 					$(".background").fadeOut(200);
 
 					// Redirect to new item page
-					window.location.href = "/item/" + data.id;
+					if (data.id) {
+						window.location.href = "/item/" + data.id;
+					} else {
+						console.log("Error! :(");
+						console.log(data);
+					}
 				},
 				error: function(data) {
 					console.log("Error! :(");
@@ -185,7 +190,12 @@ $(document).ready(function() {
 					$(".background").fadeOut(200);
 
 					// Redirect to new item page
-					window.location.href = "/item/" + itemId;
+					if (itemId) {
+						window.location.href = "/item/" + itemId;
+					} else {
+						console.log("Error! :(");
+						console.log(data);
+					}
 				},
 				error: function(data) {
 					console.log("Error! :(");
@@ -390,7 +400,7 @@ $(document).ready(function() {
 		var displayBox = $(this).parents(".family-display");
 
 		// Clear out the value (because the user wants to type a new family in)
-		displayBox.siblings("input[name=family]").val();
+		displayBox.siblings("input[name=family]").val('');
 
 		// Hide the display box
 		displayBox.hide();

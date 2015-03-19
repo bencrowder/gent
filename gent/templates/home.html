@@ -79,6 +79,23 @@
 </section>
 {% endif %}
 
+{% if general_items %}
+<section class="home split">
+	<h2 class="container">General Items</h2>
+
+	<ul class="items">
+		{% for item in general_items %}
+		<li class="container">
+			<a href="{% url "item" item.id %}">
+				<label>{{ item.title }}</label>
+				<div class="sub">{{ item.date_created|date:"F j, Y" }}</div>
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+</section>
+{% endif %}
+
 {% if tags %}
 <section class="home split">
 	<h2 class="container">Top Tags</h2>

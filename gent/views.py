@@ -18,16 +18,19 @@ def home(request):
     items = Item.objects.filter(owner=request.user).order_by('-date_created')[:50]
     families = set()
     families_add = families.add
-    recent_families = [i.family for i in items if not (i.family in families or families_add(i.family))]
+    recent_families = [i.family for i in items if i.family and not (i.family in families or families_add(i.family))]
     recent_families = recent_families[:7]
 
     # Get list of recent items
     recent_items = Item.objects.filter(owner=request.user, completed=False).order_by('-date_created')[:3]
 
+    # Get list of general items (unattached to families)
+    general_items = Item.objects.filter(owner=request.user, family=None).order_by('-date_created')
+
     # Get list of tags
     tags = Tag.objects.filter(owner=request.user).annotate(num_items=Count('items')).order_by('-num_items', 'name')[:10]
 
-    return render(request, 'home.html', {'user': request.user, 'title': 'Gent', 'tags': tags, 'recent_families': recent_families, 'recent_items': recent_items, 'starred_families': starred_families, 'starred_items': starred_items})
+    return render(request, 'home.html', {'user': request.user, 'title': 'Gent', 'tags': tags, 'recent_families': recent_families, 'recent_items': recent_items, 'starred_families': starred_families, 'starred_items': starred_items, 'general_items': general_items})
 
 @login_required()
 def search(request):
@@ -205,11 +208,11 @@ def ws_item(request):
 
     if request.method == 'POST':
         # New item
-        if title == '' or (family_id == '' and family is None):
-            response = { 'status': 501, 'message': "Missing title or family" }
+        if title == '':
+            response = { 'status': 501, 'message': "Missing title" }
         else:
             try:
-                if family is None:
+                if family is None and family_id != '':
                     family = Family.objects.get(id=family_id)
 
                 item = Item(title=title, family=family, notes=notes, owner=request.user, starred=starred)
@@ -223,11 +226,11 @@ def ws_item(request):
 
     elif request.method == 'PUT':
         # Update item
-        if title == '' or (family_id == '' and family is None):
-            response = { 'status': 501, 'message': "Missing title or family" }
+        if title == '':
+            response = { 'status': 501, 'message': "Missing title" }
         else:
             try:
-                if family is None:
+                if family is None and family_id != '':
                     family = Family.objects.get(id=family_id)
 
                 item.title = title

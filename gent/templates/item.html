@@ -3,7 +3,7 @@
 {% load markdown %}
 
 {% block content %}
-<div id="item-header" class="container{% if item.completed %} completed{% endif %}" data-id="{{ item.id }}" data-family-url="{% url 'family' item.family.id %}">
+<div id="item-header" class="container{% if item.completed %} completed{% endif %}" data-id="{{ item.id }}" {% if item.family %}data-family-url="{% url 'family' item.family.id %}"{% endif %}>
 	<div class="checkbox"></div>
 	<h2>
 		<label id="item-title">{{ item.title }}</label>
@@ -11,12 +11,14 @@
 	</h2>
 </div>
 
+{% if item.family %}
 <section>
 	<h2 class="container">Family</h2>
 	<div class="content container">
 		<a class="family-link" data-id="{{ item.family.id }}" href="{% url "family" item.family.id %}">{{ item.family.html|safe }}</a>
 	</div>
 </section>
+{% endif %}
 
 {% if item.notes %}
 <section id="notes">
@@ -67,9 +69,9 @@
 	<textarea type="text" id="edit-title" name="title">{{ item.title }}</textarea>
 
 	<label>Family</label>
-	<input type="hidden" name="family" value="{{ item.family.id }}" />
-	<div class="family-display"><a href="" class="delete">×</a><div>{{ item.family.html|safe }}</div></div>
-	<input type="text" id="edit-family" name="family-box" class="family-box hidden" />
+	<input type="hidden" name="family" value="{% if item.family %}{{ item.family.id }}{% endif %}" />
+	<div class="family-display {% if not item.family %}hidden {% endif %}"><a href="" class="delete">×</a><div>{% if item.family %}{{ item.family.html|safe }}{% endif %}</div></div>
+	<input type="text" id="edit-family" name="family-box" class="family-box {% if item.family %}hidden{% endif %}" />
 
 	<label>Notes</label>
 	<textarea id="edit-notes" name="notes">{{ item.notes }}</textarea>
