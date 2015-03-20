@@ -11,7 +11,7 @@ import datetime
 def home(request):
     # Get list of starred families/items
     starred_families = Family.objects.filter(owner=request.user, starred=True).annotate(num_items=Count('items')).order_by('-num_items')
-    starred_items = Item.objects.filter(owner=request.user, starred=True).order_by('-date_created')
+    starred_items = Item.objects.filter(owner=request.user, starred=True, completed=False).order_by('-date_created')
 
     # Get list of recent families (families with most recent items)
     # Go through extra stuff to make it unique
