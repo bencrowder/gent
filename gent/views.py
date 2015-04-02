@@ -371,5 +371,3 @@ def ws_family_search(request):
 
     return JsonResponse(response)
 
-def logout(request):
-    return logout_then_login(request)

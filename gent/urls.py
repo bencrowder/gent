@@ -10,7 +10,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('django.contrib.auth.urls')),
-    url(r'^logout/$', 'gent.views.logout', name='logout'),
+    url(r'^logout/$', 'django.contrib.auth.views.logout_then_login', name='logout'),
 
     url(r'^ws/family/update-item-order/$', 'gent.views.ws_update_item_order', name='ws_update_item_order'),
     url(r'^ws/family/search/$', 'gent.views.ws_family_search', name='ws_family_search'),
